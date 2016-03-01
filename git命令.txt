@@ -1,0 +1,59 @@
+安装完成后，还需要最后一步设置，在命令行输入：
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+
+
+
+
+
+
+创建一个版本库
+$ mkdir learngit
+$ cd learngit
+$ pwd
+/c/Users/ygxqqx/learngit
+
+第二步，通过git init命令把这个目录变成Git可以管理的仓库：
+$ git init
+
+$ git add readme.txt
+$ git commit -m "写修改信息"
+
+$ git status
+git status命令可以让我们时刻掌握仓库当前的状态，上面的命令告诉我们，
+readme.txt被修改过了，但还没有准备提交的修改。
+
+$ git diff     顾名思义就是查看difference
+
+$ git log命令显示从最近到最远的提交日志
+
+
+要关联一个远程库，使用命令
+$ git remote add origin https://github.com/ygxqqx/ygxqqx.git
+
+
+关联后远程库后,使用命令$ git push -u origin master第一次推送master分支的所有内容；
+
+此后,每次本地提交后,只要有必要,就可以使用命令$ git push origin master推送最新修改
+
+====================================================
+…or create a new repository on the command line
+
+	echo "# practice" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin https://github.com/ygxqqx/practice.git
+	git push -u origin master
+
+…or push an existing repository from the command line
+
+	git remote add origin https://github.com/ygxqqx/practice.git
+	git push -u origin master
+
+…or import code from another repository
+
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+============================================================
+
