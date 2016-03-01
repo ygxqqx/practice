@@ -57,3 +57,8 @@ $ git remote add origin https://github.com/ygxqqx/ygxqqx.git
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 ============================================================
 
+
+远程库已经准备好了，下一步是用命令git clone克隆一个本地库
+
+git clone https://github.com/ygxqqx/practice.git
+
