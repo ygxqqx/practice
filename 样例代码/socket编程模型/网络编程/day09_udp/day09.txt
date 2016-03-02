@@ -1,0 +1,234 @@
+一.信号量(同步)
+	1.回顾：
+			一个进程控制另外一个进程.
+			逻辑变量+pause/sleep+信号
+	2.信号量(semaphore)信号灯
+		三个数据：红灯/绿灯/黄灯				
+								60   90   10
+		信号量是共享内存整数数组.根据需要定义指定的数组长度
+		信号量就是根据数组中的值，决定阻塞还是解除阻塞
+	
+	3.编程
+			3.1.创建或者得到信号量					semget
+			3.2.初始化信号量中指定下标的值	semctl
+			3.3.根据信号量阻塞或者解除阻塞	semop
+			3.4.删除信号量									semctl
+案例：
+			A：													B
+			创建信号量						 	得到信号量
+			初始化信号量						
+			根据信号量阻塞					解除阻塞
+			删除信号量							
+				
+			semget函数说明
+			int semget(key_t key,
+					int nums,//信号量数组个数
+					int flags);//信号量的创建标记
+											//创建IPC_CREAT|IPC_EXCL|0666
+											//打开0
+			返回:  -1:失败
+						>=0:成功返回信号量的ID
+						
+										
+			int semop(
+					int semid,//信号量ID
+					struct sembuf *op,//对信号量的操作.操作可以是数组多个
+					size_t nums,//第二个参数的个数
+				);
+			返回：
+					-1:时失败
+					 0:成功									
+			
+			int semctl(int semid,
+						int nums,//对IPC_RMID无意义
+						int cmd,//SETVAL  IPC_RMID
+						...);//对IPC_RMID无意义
+			
+			
+			struct  sembuf 
+			{
+				int sem_num;//下标
+				int sem_op;
+				int sem_flg;//建议为0.
+			}
+			
+			sem_op:
+					前提条件信号量是unsigned short int;
+					不能<0.
+					-:够减，则semop马上返回,不够减，则阻塞.
+					+:执行+操作
+					0:判定信号量>0，则阻塞，直到为0
+			控制进程的搭配方式：
+						+(解除阻塞) -(阻塞)
+						0(阻塞)     -(解除阻塞)
+			
+			
+			
+二.网络
+	1.基础（ip）
+		1.1.网络工具
+				ping
+				ping ip地址
+				ping -b ip广播地址
+				ifconfig -a				
+				
+				netstat -a
+				netstat -u
+				netstat -t
+				netstat -x
+				netstat -n
+				
+				route
+				lsof
+		1.2.网络的基本概念
+				网络编程采用socket模型.
+				网络通信本质也是进程之间的IPC。
+							是不同主机之间。
+				
+				识别主机：4字节整数:IP地址
+				识别进程：2字节整数:端口号
+						
+				IP地址的表示方法：	内部表示：4字节整数 
+													 	外部表示：数点字符串
+													 						结构体
+						1 2 3 4	 分段表示，每个段使用.分割
+						"192.168.0.26"
+				
+						
+				ip地址的转换：		
+				
+				struct  sockaddr_in
+				{
+					int 						sin_family;
+					in_port_t 			sin_port;
+					struct in_addr 	sin_addr;
+					
+				}
+				
+				struct in_addr
+				{
+					in_addr_t  s_addr;
+				}		
+				//总结：
+						IP地址的表示
+								字符串表示"192.168.0.26"
+								整数表示:in_addr_t;
+								字结构表示struct in_addr;
+						连接点：endpoint
+						struct sockaddr_in
+						{
+							in_port_t 				sin_port;
+							struct in_addr   	sin_addr;
+						};
+		1.3.IP地址的转换
+			inet_addr   //把字符串转换为整数（网络字节序）
+			inet_aton		//把字符串转换为struct in_addr;(网络字结序)
+			
+			#inet_network//把字符串转换为整数（本地字节序）
+			
+			inet_ntoa		//把结构体转换为字符串
+			
+			htons
+			htonl
+			
+			ntohs
+			ntohl
+			
+		1.4.IP地址的意义	
+			IP地址的位表达不同意义：
+					IP地址组建网络：网络标识/主机标识
+							 网络					主机
+			A类			 7						 24				网络少  主机
+			B类		   14						 16				 	
+			C类			 21							8	
+			D类			 组播	
+			E类		   没有使用
+			
+		1.5.计算机系统中的网络配置
+			/etc/hosts文件  配置IP,域名,主机名
+						gethostbyname
+						gethostbyaddr
+			/etc/protocols文件  配置系统支持的协议
+			/etc/services文件 配置服务			
+			get***by***;			
+			gethostbyname			
+			getprotobyname
+			
+			
+			
+							
+	2.TCP/UDP编程
+			对等模型:AF_INET  	SOCK_DGRAM   	0:UDP
+			C/S 模型:AF_INET		SOCK_STREAM  	0:TCP
+		2.0.网络编程
+				ISO的7层模型:
+							物理层					
+							数据链路层			数据链路层(数据物理怎么传输)
+							网络层					IP层			(数据的传输方式)
+							传输层					传输层		 (数据传输的结果)					
+							会话层					应用层			(数据传递的含义)
+							表示层
+							应用层
+								 
+		2.1.UDP编程的数据特点
+				UDP采用对等模型SOCK_DGRAM
+				socket											 socket:socket
+				绑定IP地址bind							 连接目标(可选)		conncect
+				read/recv/recvfrom					 发送数据	write/send/sendto
+				关闭close			
+案例:
+		A:														B
+			接收用户的数据						 发送数据
+			打印数据与发送者IP				接收数据并打印
+			返发一个信息								
+			
+		总结:
+				1.问题:
+						connect + send  == sendto
+				2.问题:
+						recvfrom的作用不是专门从指定IP接收
+						而是从任意IP接收数据,返回发送数据者的IP
+				3.问题:
+						为什么要bind,bind主要目的告诉网络发送数据的目标.
+						是否一定绑定才能发送数据?
+						否:只要知道你的IP与PORT,就能发送数据.
+				4.问题:
+						为什么发送者没有绑定IP与端口,他也有端口?
+						底层网络驱动,帮我们自动生成IP与端口.
+				5.缺陷:
+						接收方不区分发送者的.		
+								
+	send函数		
+	sendto函数
+			int sendto(
+					int fd,//socket描述符号
+					const void *buf,//发送的数据缓冲
+					size_t size,//发送的数据长度
+					int flags,//发送方式MSG_NOWAIT MSG_OOB
+					const struct sockaddr *addr,//发送的目标的IP与端口
+					socklen_t len//sockaddr_in的长度
+				);
+			返回:
+					-1:发送失败
+					>=0:发送的数据长度
+	recv函数
+	recvfrom函数					
+			int recvfrom(
+					int fd,
+					void *buf,
+					size_t size,
+					int flags,
+					struct sockaddr*addr,//返回发送者IP与端口
+					socklen_t *len);//输入返回IP的缓冲大小,返回实际IP的大小							
+				
+		2.2.TCP编程的数据特点
+		2.3.TCP服务器的编程
+	3.TCP的服务器编程模型
+	4.IP协议与处理（SOCK_RAW,SOCK_PACKET）
+	5.pcap编程
+	6.HTTP协议与网页搜索
+	
+作业:
+		1.重新编写UDP网络通信	
+		2.使用gethostbyname的得到bbs.tarena.com.cn
+														 www.sina.com
