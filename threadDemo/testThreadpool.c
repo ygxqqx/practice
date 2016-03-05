@@ -1,8 +1,8 @@
 #include "threadpool.h"
 
 
-void handler(void *arg){
-	int n = (int)(*arg);
+void hand(void *arg){
+	int n = (int)(arg);
 	unsigned long sum = 0, i;
 
 	for(i=0; i<n; ++i){
@@ -14,10 +14,15 @@ void handler(void *arg){
 
 int main(){
 
-	threadpool_t *pool = threadpool_init(4);
+	threadpool_t *pool = threadpool_init(8);
+	if(pool)
+		printf("pool init successful thread start:%d\n", pool->thread_start);
 	int i;
 	for(i=0; i<10000; ++i){
-		threadpool_add(pool, handler, (void *)i);
+		// printf("read sum %d\n", i);
+		if(threadpool_add(pool, hand, (void *)i) == -1){
+			printf("pthread add err===========\n");
+		}
 	}
 	
 	threadpool_destroy(pool, 1);

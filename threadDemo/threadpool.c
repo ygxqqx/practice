@@ -9,16 +9,29 @@ void *handler(void *arg){
 	thread_task* p;
 	while(1){
 		pthread_mutex_lock(&(pool->mutex));
-		while(pool->quequ_size <= 0)
+		while(pool->quequ_size <= 0 && (pool->shutdown == GRACEFULSHUTDOWN))
 			pthread_cond_wait(&(pool->cond), &(pool->mutex));
+		if(pool->shutdown == SHUTDOWNNOW){
+			break;
+		}
+		else if(pool->shutdown == GRACEFULSHUTDOWN && pool->quequ_size <= 0){
+			break;
+		}
 		p = pool->head->next;
+		if(p == NULL){
+			pthread_mutex_unlock(&(pool->mutex));
+			continue;
+		}
 		pool->head->next = p->next;
 		pool->quequ_size--;
 		pthread_mutex_unlock(&(pool->mutex));
 		(*(p->func))(p->arg);
 		free(p);
 	}
-
+	pool->thread_start--;
+	pthread_mutex_unlock(&(pool->mutex));
+	pthread_exit(NULL);
+	return NULL;
 }
 
 
@@ -29,14 +42,17 @@ threadpool_t *threadpool_init(int num){
 		return NULL;
 	}
 	threadpool_t *pool;
-	if(!(pool = (threadpool_t *)malloc(sizeof(threadpool_t))))
+	if((pool = (threadpool_t *)malloc(sizeof(threadpool_t))) == NULL)
 		return NULL;
 
 	// pool->thread_count = num;
 	pool->quequ_size = 0;
+	pool->thread_count = 0;
+	pool->thread_start = 0;
+	pool->shutdown = GRACEFULSHUTDOWN;
 	pool->head = (thread_task *)malloc(sizeof(thread_task));
 	pool->threads = (pthread_t *)malloc(sizeof(pthread_t) * num);
-	if(!(pool->head) || !(pool->threads)){
+	if((pool->head) == NULL || (pool->threads) == NULL){
 		goto err;
 	}
 	pool->head->next = NULL;
@@ -67,9 +83,13 @@ err:
 
 int threadpool_add(threadpool_t *pool, void (*handler)(void *),void *arg){
 	int err = 0;
-	if(!pool || !handler || !arg)
+	if(pool == NULL || handler == NULL || arg == NULL)
 		return -1;
-	pthread_mutex_lock(&pool->mutex);
+	pthread_mutex_lock(&(pool->mutex));
+	if(pool->shutdown == SHUTDOWNNOW){
+		pthread_mutex_unlock(&(pool->mutex));
+		return err;
+	}
 	thread_task *task;
 	if((task = (thread_task *)malloc(sizeof(thread_task))) == NULL){
 		pthread_mutex_unlock(&(pool->mutex));
@@ -81,15 +101,15 @@ int threadpool_add(threadpool_t *pool, void (*handler)(void *),void *arg){
 	task->next = pool->head->next;
 	pool->head->next = task;
 	pool->quequ_size++;
-	pthread_mutex_unlock(&pool->mutex);
+	pthread_mutex_unlock(&(pool->mutex));
 
-	pthread_cond_signal(&pool->cond);
+	pthread_cond_signal(&(pool->cond));
 	return err;
 }
 
 int threadpool_free(threadpool_t *pool){
 
-	if(!pool)
+	if(pool == NULL)
 		return -1;
 	if(pool->threads)
 		free(pool->threads);
