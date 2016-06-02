@@ -1,28 +1,23 @@
 #include "iostream"
 using namespace std;
 
-class AA
-{
+class AA {
 public:
-	AA() //无参构造函数 默认构造函数
-	{	
+	AA() {
+		//无参构造函数 默认构造函数	
 		cout<<"我是构造函数，自动被调用了"<<endl;
 	}
-	AA(int _a) //无参构造函数 默认构造函数
-	{	
+	AA(int _a) {
+		//无参构造函数 默认构造函数	
 		a = _a;
 	}
-// 	AA(const AA &obj2)
-// 	{
-// 		cout<<"我也是构造函数，我是通过另外一个对象obj2，来初始化我自己"<<endl;
-// 		a = obj2.a + 10;
-// 	}
-	~AA()
-	{
+
+	~AA() {
+
 		cout<<"我是析构函数，自动被调用了"<<endl;
 	}
-	void getA()
-	{
+	void getA() {
+
 		printf("a:%d \n", a);
 	}
 protected:
@@ -31,8 +26,8 @@ private:
 };
 
 //单独搭建一个舞台
-void ObjPlay01()
-{
+void ObjPlay01() {
+
 	AA a1; //变量定义
 	
 	//赋值构造函数的第一个应用场景
@@ -43,8 +38,8 @@ void ObjPlay01()
 }
 
 //单独搭建一个舞台
-void ObjPlay02()
-{
+void ObjPlay02() {
+
 	AA a1(10); //变量定义
 
 	//赋值构造函数的第一个应用场景
@@ -55,8 +50,8 @@ void ObjPlay02()
 	a2.getA();
 }
 
-void main()
-{
+void main() {
+	
 	ObjPlay02();
 	system("pause");
 }

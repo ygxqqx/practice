@@ -2,56 +2,55 @@
 using namespace std;
 
 //a + bi //复数
-class Complex
-{
+class Complex {
 public:
 	friend ostream& operator<<(ostream &out, Complex &c1);
-	Complex(int a, int b)
-	{
+	Complex(int a, int b) {
+
 		this->a = a;
 		this->b = b;
 	}
-	void printCom()
-	{
+	void printCom() {
+
 		cout<<a<<" + "<<b<<"i "<<endl;
 	}
 	//通过类成员函数完成-操作符重载
-	Complex operator-(Complex &c2)
-	{
+	Complex operator-(Complex &c2) {
+
 		Complex tmp(a - c2.a, this->b - c2.b);
 		return tmp;
 	}
-	Complex operator+(Complex &c2)
-	{
+	Complex operator+(Complex &c2) {
+
 		Complex tmp(a + c2.a, this->b + c2.b);
 		return tmp;
 	}
 	//通过成员函数完成前置--
-	Complex& operator--()
-	{
+	Complex& operator--() {
+
 		this->a--;
 		this->b--;
 		return *this;
 	}
 	//通过成员函数完成前置--
-	Complex& operator++()
-	{
+	Complex& operator++() {
+
 		this->a++;
 		this->b++;
 		return *this;
 	}
 
 	//通过类成员函数完成后置--
-	Complex operator--(int)
-	{
+	Complex operator--(int) {
+
 		Complex tmp = *this;
 		this->a--;
 		this->b--;
 		return tmp;
 	}
 	//通过类成员函数完成后置--
-	Complex operator++(int)
-	{
+	Complex operator++(int) {
+
 		Complex tmp = *this;
 		this->a++;
 		this->b++;
@@ -63,8 +62,7 @@ private:
 	int b;
 };
 
-void main61()
-{
+void main61() {
 
 	Complex c1(1, 2), c2(3, 4);
 
@@ -106,14 +104,16 @@ void main61()
 	system("pause");
 }
 
-ostream& operator<<(ostream &out, Complex &c1)
-{
+ostream& operator<<(ostream &out, Complex &c1) {
+
 	//out<<"12345，生活真是苦"<<endl;
 	out<<c1.a<<" + "<<c1.b<<"i "<<endl;
 	return out;
 }
-void main()
-{
+
+
+void main() {
+
 	Complex c1(1, 2), c2(3, 4);
 	int a = 10;
 	char *p = "addddd";
@@ -144,8 +144,6 @@ void main()
 	//s cout.operator<<(c1);
 
 	//s.operator<<("abcd");
-
-
 
 	system("pause");
 

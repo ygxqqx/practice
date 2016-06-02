@@ -15,8 +15,8 @@
 int readFile2(const char *pfilename/*in*/, char ***p/*out*/, int *lineNum/*int out*/);
 
 
-char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
-{
+char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/) {
+
 	int		rv = 0;
 	FILE	*fp = NULL;
 	char	 lineBuf[1024*4];
@@ -25,40 +25,34 @@ char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
 	char *p = NULL;
 	int tmpLine = 0, strLine = 0, i = 0;
 
-	if (pfilename==NULL || lineNum==NULL ) 
-	{
+	if (pfilename==NULL || lineNum==NULL ) {
 		rv = -1;
 		printf("readFile1() err. param err \n");
 		goto End;
 	}
 
 	fp = fopen(pfilename, "r");
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
+
 		rv = -2;
 		printf("fopen() err. \n");
 		goto End;
 	}
 	
 	//第一遍 读取文件有多少行
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
-		}
-		else
-		{
+		} else {
 			tmpLine ++;
 		}
 	}
 
 	pTmp = (char **)malloc(tmpLine * sizeof(char *));
-	if (pTmp == NULL)
-	{
+	if (pTmp == NULL) {
 		rv = -2;
 		printf("malloc() err. \n");
 		goto End;
@@ -69,20 +63,17 @@ char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
 	
 	//
 	i = 0;
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
 		}
 
 		strLine = strlen(lineBuf);
 		pTmp[i] = (char *)malloc((strLine + 1) * sizeof(char));
-		if (pTmp[i] == NULL)
-		{
+		if (pTmp[i] == NULL) {
 			rv = -3;
 			printf("malloc() err. \n");
 			goto End;
@@ -94,8 +85,7 @@ char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
 
 
 End:
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp); 
 	}
 	//赋值
@@ -103,17 +93,13 @@ End:
 	return pTmp;
 }
 
-void FreeMypp(char **p, int linenum)
-{
+void FreeMypp(char **p, int linenum) {
 	int i = 0;
-	if (p == NULL)
-	{
+	if (p == NULL) {
 		return NULL;
 	}
-	for (i=0; i<linenum; i++)
-	{
-		if (p[i] != NULL)
-		{
+	for (i=0; i<linenum; i++) {
+		if (p[i] != NULL) {
 			free(p[i]) ;
 		}
 	}
@@ -121,20 +107,17 @@ void FreeMypp(char **p, int linenum)
 	return ;
 }
 
-void main21()
-{
+void main21() {
 
-	char				** mypp = NULL;
-	const char		*pfilename = "c:/1.txt";
-	int				lineNum = 0, i = 0;
+	char **mypp = NULL;
+	const char *pfilename = "c:/1.txt";
+	int lineNum = 0, i = 0;
 
 	mypp = readFile1(pfilename/*in*/, &lineNum/*in out*/);
-	if (mypp == NULL)
-	{
+	if (mypp == NULL) {
 		return ;
 	}
-	for (i=0; i<lineNum; i++)
-	{
+	for (i=0; i<lineNum; i++) {
 		printf("%s\n", mypp[i]);
 	}
 
@@ -144,8 +127,7 @@ void main21()
 
 
 
-int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in out*/)
-{
+int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in out*/) {
 	int		rv = 0;
 	FILE	*fp = NULL;
 	char	 lineBuf[1024*4];
@@ -154,40 +136,33 @@ int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in 
 	char *p = NULL;
 	int tmpLine = 0, strLine = 0, i = 0;
 
-	if (pfilename==NULL || lineNum==NULL || myfileP==NULL) 
-	{
+	if (pfilename==NULL || lineNum==NULL || myfileP==NULL) {
 		rv = -1;
 		printf("readFile1() err. param err \n");
 		goto End;
 	}
 
 	fp = fopen(pfilename, "r");
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
 		rv = -2;
 		printf("fopen() err. \n");
 		goto End;
 	}
 
 	//第一遍 读取文件有多少行
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
-		}
-		else
-		{
+		} else {
 			tmpLine ++;
 		}
 	}
 
 	pTmp = (char **)malloc(tmpLine * sizeof(char *));
-	if (pTmp == NULL)
-	{
+	if (pTmp == NULL) {
 		rv = -2;
 		printf("malloc() err. \n");
 		goto End;
@@ -198,20 +173,17 @@ int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in 
 
 	//
 	i = 0;
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
 		}
 
 		strLine = strlen(lineBuf);
 		pTmp[i] = (char *)malloc((strLine + 1) * sizeof(char));
-		if (pTmp[i] == NULL)
-		{
+		if (pTmp[i] == NULL) {
 			rv = -3;
 			printf("malloc() err. \n");
 			goto End;
@@ -223,8 +195,7 @@ int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in 
 
 
 End:
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp); 
 	}
 	//赋值
@@ -233,31 +204,28 @@ End:
 	return rv;
 }
 
-void main22()
-{
+void main22() {
 	int				ret = 0;
 	char				** mypp = NULL;
 	const char		*pfilename = "c:/1.txt";
 	int				lineNum = 0, i = 0;
 
 	ret = readFile1_Adv(pfilename/*in*/, &mypp, &lineNum/*in out*/);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		return ;
 	}
-	for (i=0; i<lineNum; i++)
-	{
+	for (i=0; i<lineNum; i++) {
+
 		printf("%s\n", mypp[i]);
 	}
-	 FreeMypp(mypp, lineNum);
+		FreeMypp(mypp, lineNum);
 
 	system("pause");
 }
 
 
 //
-int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
-{
+int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/) {
 	int		rv = 0;
 	FILE	*fp = NULL;
 	char	 lineBuf[1024*4];
@@ -266,40 +234,33 @@ int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
 	char *p = NULL;
 	int tmpLine = 0, strLine = 0, i = 0;
 
-	if (pfilename==NULL || myfileP==NULL) 
-	{
+	if (pfilename==NULL || myfileP==NULL) {
 		rv = -1;
 		printf("readFile1() err. param err \n");
 		goto End;
 	}
 
 	fp = fopen(pfilename, "r");
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
 		rv = -2;
 		printf("fopen() err. \n");
 		goto End;
 	}
 
 	//第一遍 读取文件有多少行
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
-		}
-		else
-		{
+		} else {
 			tmpLine ++;
 		}
 	}
 
 	pTmp = (char **)malloc((tmpLine+1) * sizeof(char *));
-	if (pTmp == NULL)
-	{
+	if (pTmp == NULL) {
 		rv = -2;
 		printf("malloc() err. \n");
 		goto End;
@@ -311,20 +272,17 @@ int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
 
 	//
 	i = 0;
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//读每一行
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
-		if (p == NULL) 
-		{
+		if (p == NULL) {
 			break;
 		}
 
 		strLine = strlen(lineBuf);
 		pTmp[i] = (char *)malloc((strLine + 1) * sizeof(char));
-		if (pTmp[i] == NULL)
-		{
+		if (pTmp[i] == NULL) {
 			rv = -3;
 			printf("malloc() err. \n");
 			goto End;
@@ -336,8 +294,7 @@ int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
 
 
 End:
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp); 
 	}
 	//赋值
@@ -346,17 +303,13 @@ End:
 	return rv;
 }
 
-void FreeMypp3(char **p)
-{
+void FreeMypp3(char **p) {
 	int i = 0;
-	if (p == NULL)
-	{
+	if (p == NULL) {
 		return NULL;
 	}
-	for (i=0; p[i]!=NULL; i++)
-	{
-		if (p[i] != NULL)
-		{
+	for (i=0; p[i]!=NULL; i++) {
+		if (p[i] != NULL) {
 			free(p[i]) ;
 		}
 	}
@@ -364,20 +317,17 @@ void FreeMypp3(char **p)
 	return ;
 }
 
-void main()
-{
+void main() {
 	int				ret = 0;
 	char				** mypp = NULL;
 	const char		*pfilename = "c:/1.txt";
 	int				lineNum = 0, i = 0;
 
 	ret = readFile1_Adv3(pfilename/*in*/, &mypp/*in out*/);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		return ;
 	}
-	for (i=0; mypp[i]!=NULL; i++)
-	{
+	for (i=0; mypp[i]!=NULL; i++) {
 		printf("%s\n", mypp[i]);
 	}
 	FreeMypp3(mypp);

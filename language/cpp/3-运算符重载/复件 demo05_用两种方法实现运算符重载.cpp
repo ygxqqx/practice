@@ -2,30 +2,29 @@
 using namespace std;
 
 //a + bi //复数
-class Complex
-{
+class Complex {
 public:
 	friend Complex operator+(Complex &c1, Complex &c2);
 	friend Complex operator*(Complex &c1, Complex &c2);
 	friend Complex& operator++(Complex &c1); //前置++
-	Complex(int a, int b)
-	{
+	Complex(int a, int b) {
+
 		this->a = a;
 		this->b = b;
 	}
-	void printCom()
-	{
+	void printCom() {
+
 		cout<<a<<" + "<<b<<"i "<<endl;
 	}
 	//通过类成员函数完成-操作符重载
-	Complex operator-(Complex &c2)
-	{
+	Complex operator-(Complex &c2) {
+
 		Complex tmp(a - c2.a, this->b - c2.b);
 		return tmp;
 	}
 	//通过成员函数完成前置--
-	Complex& operator--()
-	{
+	Complex& operator--() {
+
 		this->a--;
 		this->b--;
 		return *this;
@@ -36,28 +35,27 @@ private:
 	int b;
 };
 
-Complex operator+(Complex &c1, Complex &c2)
-{
+Complex operator+(Complex &c1, Complex &c2) {
+
 	Complex tmp(c1.a + c2.a, c1.b + c2.b);
 	return tmp;
 }
 
-Complex operator*(Complex &c1, Complex &c2)
-{
+Complex operator*(Complex &c1, Complex &c2) {
+
 	Complex tmp(c1.a*c2.a, c1.b*c2.b);
 	return tmp;
 }
 
 //前置++ 
-Complex& operator++(Complex &c1)
-{
+Complex& operator++(Complex &c1) {
+
 	c1.a ++;
 	c1.b ++;
 	return c1;
 }
 
-void main()
-{
+void main() {
 
 	Complex c1(1, 2), c2(3, 4);
 
@@ -87,8 +85,6 @@ void main()
 	--c1;
 	c1.printCom();
 	//c1.operator--()
-
-
 
 	system("pause");
 }

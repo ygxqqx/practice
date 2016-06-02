@@ -2,26 +2,26 @@
 #include "Array.h"
 using namespace std;
 
-int main()
-{
+int main() {
+
     Array a1(10);
     
-    for(int i=0; i<a1.length(); i++)
-    {
+    for (int i=0; i<a1.length(); i++) {
+    	
         a1.setData(i, i); 
 		//a1[i] = i;
     }
     
-    for(int i=0; i<a1.length(); i++)
-    {
+    for (int i=0; i<a1.length(); i++) {
+    	
         printf("array %d: %d\n", i, a1.getData(i));
 		//printf("array %d: %d\n", i, a1[i]);  ¹¦ÄÜ1
     }
     
     Array a2 = a1;
     
-    for(int i=0; i<a2.length(); i++)
-    {
+    for (int i=0; i<a2.length(); i++) {
+    	
         printf("array %d: %d\n", i, a2.getData(i));
 		//printf("array %d: %d\n", i, a2[i]);
     }

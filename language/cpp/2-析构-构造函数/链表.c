@@ -18,8 +18,7 @@ typedef struct _LinkList
 #include "string.h"
 #include "stdlib.h"
 
-typedef struct Node
-{
+typedef struct Node {
 	int data;
 	struct Node *next;
 }SLIST;
@@ -37,14 +36,13 @@ int SList_Destory(SLIST *pHead);
 int SList_Resve(SLIST *pHead);
 
 //能写出稳健的、长期运算的工作代码  1年工作经验那
-SLIST *SList_Creat()
-{
+SLIST *SList_Creat() {
+
 	SLIST *pHead = NULL, *pM =NULL, *pCur = NULL;
 	int data = 0;
 	//1 创建头结点并初始化
 	pHead = (SLIST *)malloc(sizeof(SLIST));
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		return NULL;
 	}
 	pHead->data = 0;
@@ -57,13 +55,11 @@ SLIST *SList_Creat()
 	//3 循环创建
 	//初始化当前节点，指向头结点
 	pCur = pHead;
-	while(data != -1)
-	{
+	while (data != -1) {
 		//新建业务结点 并初始化
 		//1 不断的malloc 新的业务节点 ===PM
 		pM = (SLIST *)malloc(sizeof(SLIST));
-		if (pM == NULL)
-		{
+		if (pM == NULL) {
 			SList_Destory(pHead); //
 			return NULL;
 		}
@@ -86,15 +82,13 @@ SLIST *SList_Creat()
 }
 
 // 2年工作经验那
-int SList_Creat2(SLIST **mypHead)
-{
+int SList_Creat2(SLIST **mypHead) {
 	int ret = 0;
 	SLIST *pHead = NULL, *pM =NULL, *pCur = NULL;
 	int data = 0;
 	//1 创建头结点并初始化
 	pHead = (SLIST *)malloc(sizeof(SLIST));
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		ret = -1;
 		printf("func SList_Creat2() err:%d ", ret);
 		return ret;
@@ -109,13 +103,11 @@ int SList_Creat2(SLIST **mypHead)
 	//3 循环创建
 	//初始化当前节点，指向头结点
 	pCur = pHead;
-	while(data != -1)
-	{
+	while (data != -1) {
 		//新建业务结点 并初始化
 		//1 不断的malloc 新的业务节点 ===PM
 		pM = (SLIST *)malloc(sizeof(SLIST));
-		if (pM == NULL)
-		{
+		if (pM == NULL) {
 			SList_Destory(pHead); //
 			ret = -2;
 			printf("func SList_Creat2() err:%d ", ret);
@@ -139,18 +131,15 @@ int SList_Creat2(SLIST **mypHead)
 	return ret;
 }
 
-int SList_Print(SLIST *pHead)
-{
+int SList_Print(SLIST *pHead) {
 	SLIST *p = NULL;
 
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		return -1;
 	}
 	p = pHead->next;
 	printf("\nBegin ");
-	while(p)
-	{
+	while (p) {
 		printf("%d ", p->data);
 		p  = p->next;
 	}
@@ -158,17 +147,14 @@ int SList_Print(SLIST *pHead)
 	return 0;
 }
 
-int SList_Destory(SLIST *pHead)
-{
+int SList_Destory(SLIST *pHead) {
 
 	SLIST *p = NULL, *tmp = NULL;
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		return -1;
 	}
 	p = pHead;
-	while(p)
-	{
+	while (p) {
 		//缓存下一个结点位置
 		tmp = p->next;
 		free(p);//删除当前节点
@@ -178,14 +164,12 @@ int SList_Destory(SLIST *pHead)
 }
 
 //功能：在值为x的结点前，插入值为y的结点；若值为x的结点不存在，则插在表尾。
-int SList_NodeInsert(SLIST *pHead, int x, int y)
-{
+int SList_NodeInsert(SLIST *pHead, int x, int y) {
 	SLIST *pCur = NULL, *pPre = NULL, *pM = NULL;
 
 	//根据y的值malloc新结点
 	pM = (SLIST *)malloc(sizeof(SLIST));
-	if (pM == NULL)
-	{
+	if (pM == NULL) {
 		return -1;
 	}
 	pM->data = y;
@@ -195,10 +179,8 @@ int SList_NodeInsert(SLIST *pHead, int x, int y)
 	pPre = pHead;
 	pCur = pHead->next;
 
-	while (pCur)
-	{
-		if (pCur->data == x)
-		{
+	while (pCur) {
+		if (pCur->data == x) {
 			//插入操作
 			break;
 		}
@@ -216,18 +198,15 @@ int SList_NodeInsert(SLIST *pHead, int x, int y)
 	return 0;
 }
 
-int SList_NodeDel(SLIST *pHead, int x)
-{
+int SList_NodeDel(SLIST *pHead, int x) {
 	SLIST *pCur = NULL, *pPre = NULL;
 
 	//准备pCur Pre环境
 	pPre = pHead;
 	pCur = pHead->next;
 
-	while (pCur)
-	{
-		if (pCur->data == x)
-		{
+	while (pCur) {
+		if (pCur->data == x) {
 			//插入操作
 			break;
 		}
@@ -236,8 +215,7 @@ int SList_NodeDel(SLIST *pHead, int x)
 		pCur = pCur->next; //让当前结点后移
 	}
 
-	if (pCur == NULL)
-	{
+	if (pCur == NULL) {
 		printf("没有找到要删除的结点\n");
 		return -1;
 	}
@@ -249,18 +227,15 @@ int SList_NodeDel(SLIST *pHead, int x)
 }
 
 //删除节点值为偶数的
-int SList_NodeSpecialDel(SLIST *pHead)
-{
+int SList_NodeSpecialDel(SLIST *pHead) {
 	SLIST *pCur = NULL, *pPre = NULL;
 
 	//准备pCur Pre环境
 	pPre = pHead;
 	pCur = pHead->next;
 
-	while (pCur)
-	{
-		if (pCur->data %2 == 0)
-		{
+	while (pCur) {
+		if (pCur->data %2 == 0) {
 			//插入操作
 			break;
 		}
@@ -269,8 +244,7 @@ int SList_NodeSpecialDel(SLIST *pHead)
 		pCur = pCur->next; //让当前结点后移
 	}
 
-	if (pCur == NULL)
-	{
+	if (pCur == NULL) {
 		printf("没有找到要删除的结点\n");
 		return 0;
 	}
@@ -282,33 +256,27 @@ int SList_NodeSpecialDel(SLIST *pHead)
 }
 
 
-int SList_NodeDelOueve(SLIST *pHead)
-{
+int SList_NodeDelOueve(SLIST *pHead) {
 	SLIST *p = NULL;
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		return -1;
 	}
 	p = pHead->next;
-	while (p)
-	{
-		 SList_NodeSpecialDel(p);
+	while (p) {
+		SList_NodeSpecialDel(p);
 		p = p->next;
 	}
 	return 0;
 }
 
 
-int SList_Resve(SLIST *pHead)
-{
+int SList_Resve(SLIST *pHead) {
 	SLIST *t = NULL, *p = NULL, *q = NULL;
 
-	if (pHead == NULL)
-	{
+	if (pHead == NULL) {
 		return -1;
 	}
-	if (pHead->next == NULL || pHead->next->next == NULL)
-	{
+	if (pHead->next == NULL || pHead->next->next == NULL) {
 		return -2;
 	}
 
@@ -316,8 +284,7 @@ int SList_Resve(SLIST *pHead)
 	p = pHead->next;
 	q = pHead->next->next;
 
-	while (q != NULL)
-	{
+	while (q != NULL) {
 		//逆置之前把q的后继结点保存
 		t = q->next;
 		//逆置操作
@@ -337,36 +304,31 @@ int SList_Resve(SLIST *pHead)
 	return 0;
 }
 
-void main()
-{
+void main() {
 	int ret = 0;
 	SLIST *pHead = NULL;
 	pHead = 	SList_Creat();
 	ret = SList_Print(pHead);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func SList_Print() err:%d\n", ret);
 		return ;
 	}
 
 	//删除结点值为偶数的结点
 	ret = SList_NodeDelOueve(pHead);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func SList_NodeDelOueve(pHead)() err:%d\n", ret);
 		return ;
 	}
 	ret = SList_Print(pHead);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func SList_Print() err:%d\n", ret);
 		return ;
 	}
 
 
 	ret = SList_Destory(pHead);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func SList_Destory() err:%d\n", ret);
 		return ;
 	}

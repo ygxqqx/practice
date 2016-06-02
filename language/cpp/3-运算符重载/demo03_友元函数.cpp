@@ -1,16 +1,15 @@
 #include "iostream"
 using namespace std;
 
-class A1
-{
+class A1 {
 public:
-	A1()
-	{
+	A1() {
+
 		a1 = 100;
 		a2 = 200;
 	}
-	int getA1()
-	{
+	int getA1() {
+
 		return this->a1;
 	}
 	//声明一个友元函数
@@ -22,8 +21,8 @@ private:
 	int a2;
 };
 
-void setA1(A1 *p, int a1)
-{
+void setA1(A1 *p, int a1) {
+
 	p->a1 = a1;
 }
 //friend 破坏了类的封装性。。。。
@@ -39,8 +38,8 @@ void setA1(A1 *p, int a1)
 //register
 //typedef 混号王 
 
-void main11()
-{
+void main11() {
+
 	A1 mya1;
 	cout<<mya1.getA1()<<endl;
 	setA1(&mya1, 300);
@@ -49,13 +48,12 @@ void main11()
 	system("pause");
 }
 
-class A
-{
+class A {
 	//b是a的好朋友	
 	friend class B;
 public:
-	void display()
-	{
+	void display() {
+
 		cout<<x<<endl;
 	}
 
@@ -64,15 +62,14 @@ private:
 	int x;
 };
 
-class B
-{
+class B {
 public:
-	void setA(int x)
-	{
+	void setA(int x) {
+
 		Aobj.x = x;
 	}
-	void printA()
-	{
+	void printA() {
+
 		cout<<Aobj.x<<endl;
 	}
 protected:
@@ -81,8 +78,8 @@ private:
 
 };
 
-void main()
-{
+void main() {
+	
 	B b1;
 	b1.setA(100);
 	b1.printA();
