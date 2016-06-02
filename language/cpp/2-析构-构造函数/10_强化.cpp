@@ -7,22 +7,18 @@
 #include "iostream"
 using namespace std;
 
-class ABCD 
-{ //this£¨£©
+class ABCD { //this()
 public:
-	ABCD(int a, int b, int c)
-	{
+	ABCD(int a, int b, int c) {
 		this->a = a;
 		this->b = b;
 		this->c = c;
 		printf("ABCD() construct, a:%d,b:%d,c:%d  \n", this->a, this->b, this->c);
 	}
-	~ABCD()
-	{
+	~ABCD() {
 		printf("~ABCD() construct,a:%d,b:%d,c:%d  \n", this->a, this->b, this->c);
 	}
-	int getA() 
-	{
+	int getA() {
 		return this->a;
 	}
 protected:
@@ -33,19 +29,15 @@ private:
 };
 
 
-class MyE
-{
+class MyE {
 public:
-	MyE():abcd1(1,2,3),abcd2(4,5,6),m(100)
-	{
+	MyE():abcd1(1,2,3),abcd2(4,5,6),m(100) {
 		cout<<"MyD()"<<endl;
 	}
-	~MyE()
-	{
+	~MyE() {
 		cout<<"~MyD()"<<endl;
 	}
-	MyE(const MyE & obj):abcd1(7,8,9),abcd2(10,11,12),m(100)
-	{
+	MyE(const MyE & obj):abcd1(7,8,9),abcd2(10,11,12),m(100) {
 		printf("MyD(const MyD & obj)\n");
 	}
 
@@ -58,22 +50,21 @@ public:
 
 };
 
-int doThing(MyE mye1)
-{
+int doThing(MyE mye1) {
 	printf("doThing() mye1.abc1.a:%d \n", mye1.abcd1.getA()); 
 	return 0;
 }
 
-int run2()
-{
+int run2() {
+
 	MyE myE;
 	doThing(myE);
 	return 0;
 }
 
 //
-int run3()
-{
+int run3() {
+
 	printf("run3 start..\n");
 
 	ABCD abcd = ABCD(100, 200, 300);
@@ -85,8 +76,8 @@ int run3()
 	return 0;
 }
 
-int main()
-{
+int main() {
+	
 	run2();
 	//run3();
 	system("pause");

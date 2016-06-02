@@ -1,13 +1,7 @@
-
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
 
-/*
-int printfArray(int a[10]);
-int printfArray(int a[]);
-int printfArray(int *a);
-*/
 
 int printAarray02(char pArray[10][30], int num) {
 	int i = 0;
@@ -23,7 +17,7 @@ int printAarray02(char pArray[10][30], int num) {
 	return 0;
 }
 
-int sortArray02(char bufArray[10][30], int num) {
+int so2rtArray02(char bufArray[10][30], int num) {
 	int i = 0, j = 0;
 	char tmpBuf[30];
 	for (i=0; i<num; i++) {

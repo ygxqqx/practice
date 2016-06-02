@@ -57,18 +57,15 @@ void main() {
 	
 	 printAarray03(pArray, 4);
 
-// 	for (i=0; i<4; i++)
-// 	{
-// 		for (j=i+1; j<4; j++)
-// 		{
-// 			if ( strcmp(pArray[i], pArray[j])  > 0)
-// 			{
-// 				tmp = pArray[i] ;
-// 				pArray[i] = pArray[j];
-// 				pArray[j] = tmp;
-// 			}
-// 		}
-// 	}
+	// for (i=0; i<4; i++) {
+	// 	for (j=i+1; j<4; j++) {
+	// 		if ( strcmp(pArray[i], pArray[j])  > 0) {
+	// 			tmp = pArray[i] ;
+	// 			pArray[i] = pArray[j];
+	// 			pArray[j] = tmp;
+	// 		}
+	// 	}
+	// }
 	sortArray03(pArray, 4);
 
 	printf("第三种内存排序之后\n");
@@ -84,9 +81,6 @@ void main() {
 	if (pArray != NULL) {
 		free(pArray);
 	}
-
-
-
 
 	system("pause");
 }

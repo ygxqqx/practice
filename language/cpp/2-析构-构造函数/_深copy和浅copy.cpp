@@ -2,28 +2,26 @@
 using namespace std;
 
 
-class Name
-{
+class Name {
 public:
-	Name(const char *pname)
-	{
+	Name(const char *pname) {
+
 		size = strlen(pname);
 		pName = (char *)malloc(size + 1);
 		strcpy(pName, pname);
 	}
-	Name(Name &obj)
-	{
+	Name(Name &obj) {
+
 		//用obj来初始化自己
 		pName = (char *)malloc(obj.size + 1);
 		strcpy(pName, obj.pName);
-
 		size = obj.size;
 	}
-	~Name()
-	{
+	~Name() {
+
 		cout<<"开始析构"<<endl;
-		if (pName!=NULL)
-		{
+		if (pName!=NULL) {
+
 			free(pName);
 			pName = NULL;
 			size = 0;
@@ -36,15 +34,15 @@ private:
 	int size;
 };
 
-void playObj()
-{
+void playObj() {
+
 	Name obj1("obj1.....");
 	Name obj2 = obj1;
-	cout<<"业务操作。。。5000"<<endl;
-
+	cout<<"业务操作......5000"<<endl;
 }
-void main()
-{
+
+void main() {
+
 	playObj();
 	system("pause");
 }
