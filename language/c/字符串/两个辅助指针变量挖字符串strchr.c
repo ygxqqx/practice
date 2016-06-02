@@ -23,8 +23,7 @@ abcdef
 	sssss,
 	*/
 
-int spitString(const char *buf1, char c, char buf[10][30], int *num)
-{
+int spitString(const char *buf1, char c, char buf[10][30], int *num) {
 	char *p = NULL;
 	char *pTmp = NULL;
 	int ncount = 0;
@@ -33,16 +32,13 @@ int spitString(const char *buf1, char c, char buf[10][30], int *num)
 	//步骤1 初始化条件 pTmp,p都执行检索的开头
 	p = buf1;
 	pTmp = buf1;
-	do 
-	{
+	do {
 		//步骤2 strstr strchr，会让p后移 	在p和pTmp之间有一个差值
 		p = strchr(p, c);
-		if (p == NULL) //没有找到则跳出来
-		{
+		if (p == NULL) {//没有找到则跳出来
 			break;
 		}
-		else 
-		{
+		else {
 			memset(myBuf, 0, sizeof(myBuf));
 			
 			//挖字符串
@@ -62,29 +58,23 @@ int spitString(const char *buf1, char c, char buf[10][30], int *num)
 	return 0;
 }
 
-int spitString02(const char *buf1, char c, char buf[10][30], int *num)
-{
+int spitString02(const char *buf1, char c, char buf[10][30], int *num) {
 	int ret = 0;
 	char *p = NULL;
 	char *pTmp = NULL;
 	int ncount = 0;
-	if (buf1==NULL ||  num==NULL)
-	{
+	if (buf1==NULL ||  num==NULL) {
 		return -1;
 	}
 	//步骤1 初始化条件 pTmp,p都执行检索的开头
 	p = buf1;
 	pTmp = buf1;
-	do 
-	{
+	do {
 		//步骤2 strstr strchr，会让p后移 	在p和pTmp之间有一个差值
 		p = strchr(p, c);
-		if (p == NULL) //没有找到则跳出来
-		{
+		if (p == NULL) {//没有找到则跳出来
 			break;
-		}
-		else 
-		{
+		} else {
 
 			//挖字符串
 			strncpy(buf[ncount], pTmp, p-pTmp);
@@ -101,22 +91,19 @@ int spitString02(const char *buf1, char c, char buf[10][30], int *num)
 	*num = ncount;
 	return ret;
 }
-void main()
-{
+void main() {
 	int ret = 0, i = 0;
 	const char *buf1 = "abcdef,acccd,";
 	char c = ',';
 	char buf[10][30];
 	int num = 0;
 	ret =  spitString02(buf1, c, buf, &num);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func spitString() err:%d\n", ret);
 		return ret;
 	}
 
-	for (i=0; i<num; i++)
-	{
+	for (i=0; i<num; i++) {
 		printf("%s\n", buf[i]);
 	}
 

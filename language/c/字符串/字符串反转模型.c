@@ -4,15 +4,13 @@
 #include "string.h"
 
 
-void main()
-{
+void main() {
 	char p[] = "abcde";
 	char c ;
 	char *p1 = p;
 	char *p2 = p + strlen(p) -1;
 
-	while (p1 < p2)
-	{
+	while (p1 < p2) {
 		c = *p1;
 		*p1 = *p2;
 		*p2 = c;

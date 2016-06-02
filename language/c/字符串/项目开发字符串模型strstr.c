@@ -5,13 +5,11 @@
 //char *p = "abcd1111abcd222abcd3333" 请你找出字符串abcd出现的次数
 
 //1个入口多个出口
-void main01()
-{
+void main01() {
 	char *str1 = "Borland International", *str2 = "Xnation", *ptr;
 	ptr = strstr(str1, str2);
 	
-	if (ptr == NULL)
-	{
+	if (ptr == NULL) {
 		return;
 	}
 	printf("The substring is: %s\n", ptr);
@@ -22,19 +20,14 @@ void main01()
 
 
 
-void main33()
-{
+void main33() {
 	char *p = "abcd1111abcd222abcd3333";
 	int ncout = 0;
-	do 
-	{
+	do {
 		p = strstr(p, "abcd");
-		if (p == NULL) //没有找到则跳出来
-		{
+		if (p == NULL) {//没有找到则跳出来
 			break;
-		}
-		else 
-		{
+		} else {
 			ncout++;
 			p = p + strlen("abcd");
 		}
@@ -58,29 +51,23 @@ void main33()
 			*/
 //int cltClient_rev(void *handle, unsigned char *buf, int *buflen)
 //不要相信别人给你传送的内存地址是可用的
-int getCout(char *str, char *substr, int *count)
-{
+int getCout(char *str, char *substr, int *count) {
 
 	int rv = 0;
 	char *p = str;
 	
 	int ncout = 0;
-	if (str==NULL || substr== NULL ||  count==NULL)
-	{
+	if (str==NULL || substr== NULL ||  count==NULL) {
 		rv = -1;
 		printf("func getCout()check (str==NULL || substr== NULL ||  count==NULL) err:%d \n" , rv);
 		return rv;
 	}
 
-	do 
-	{
+	do {
 		p = strstr(p, substr);
-		if (p == NULL) //没有找到则跳出来
-		{
+		if (p == NULL) {//没有找到则跳出来
 			break;
-		}
-		else 
-		{
+		} else {
 			ncout++;
 			p = p + strlen(substr);
 		}
@@ -95,8 +82,7 @@ int getCout(char *str, char *substr, int *count)
 
 }
 
-void main()
-{
+void main() {
 	int ret = 0;
 	//char *p = "abcd1111abcd222abcd3333";
 	char *p = NULL;
@@ -104,8 +90,7 @@ void main()
 	char *subp = "abcd";
 
 	ret = getCout(p, subp, &ncout);
-	if (ret != 0)
-	{
+	if (ret != 0) {
 		printf("func getCout() err:%d \n", ret);
 		return ;
 	}

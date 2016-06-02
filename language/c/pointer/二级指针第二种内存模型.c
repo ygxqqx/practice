@@ -9,33 +9,26 @@ int printfArray(int a[]);
 int printfArray(int *a);
 */
 
-int printAarray02(char pArray[10][30], int num)
-{
+int printAarray02(char pArray[10][30], int num) {
 	int i = 0;
 
-	if (pArray == NULL)
-	{
+	if (pArray == NULL) {
 		return -1;
 	}
 
-	for (i=0; i<num; i++)
-	{
+	for (i=0; i<num; i++) {
 		printf("%s \n", pArray[i]);
 	}
 
 	return 0;
 }
 
-int sortArray02(char bufArray[10][30], int num)
-{
+int sortArray02(char bufArray[10][30], int num) {
 	int i = 0, j = 0;
 	char tmpBuf[30];
-	for (i=0; i<num; i++)
-	{
-		for (j=i+1; j<num; j++)
-		{
-			if (strcmp(bufArray[i], bufArray[j]) > 0)
-			{
+	for (i=0; i<num; i++) {
+		for (j=i+1; j<num; j++) {
+			if (strcmp(bufArray[i], bufArray[j]) > 0) {
 				strcpy(tmpBuf, bufArray[i]);
 				strcpy(bufArray[i], bufArray[j]);
 				strcpy(bufArray[j], tmpBuf);
@@ -43,8 +36,7 @@ int sortArray02(char bufArray[10][30], int num)
 		}
 	}
 }
-void main()
-{
+void main() {
 	int i = 0, j = 0;
 	char tmpBuf[30];
 	

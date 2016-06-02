@@ -3,8 +3,7 @@
 #include "stdlib.h"
 
 
-void main1111()
-{
+void main1111() {
 	char* tmp = NULL;
 	int i = 0, j = 0;
 	//二级指针第一种内存模型
@@ -22,17 +21,13 @@ void main1111()
 	}
 
 	printf("排序之前\n");
-	for (i=0; i<4; i++)
-	{
+	for (i=0; i<4; i++) {
 		printf("%s \n", myArray[i]);
 	}
 
-	for (i=0; i<4; i++)
-	{
-		for (j=i+1; j<4; j++)
-		{
-			if (strcmp(myArray[i], myArray[j]) > 0)
-			{
+	for (i=0; i<4; i++) {
+		for (j=i+1; j<4; j++) {
+			if (strcmp(myArray[i], myArray[j]) > 0) {
 				//交换的是数组元素 数组元素是指针
 				tmp = myArray[i];
 				myArray[i] = myArray[j];
@@ -42,16 +37,14 @@ void main1111()
 	}
 
 	printf("排序之后\n");
-	for (i=0; i<4; i++)
-	{
+	for (i=0; i<4; i++) {
 		printf("%s \n", myArray[i]);
 	}
 
 	system("pause");
 }
 
-int main()
-{
+int main() {
 	int a[10]; //a代表数组首元素的地址 
 	main1111();
 	printf("sizeof(a[10]):%d\n" , sizeof(a)); //4

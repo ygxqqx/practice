@@ -4,8 +4,7 @@
 #include "string.h"
 #include "stdlib.h"
 
-void main03()
-{
+void main03() {
 	int i = 0;
 	FILE *fp = NULL;
 	char a[100] = "abcdefghijkddddsssss";
@@ -14,16 +13,14 @@ void main03()
 	char *fname2 = "c:/a1.txt"; //统一的用45度斜杠
 
 	fp = fopen(fname2, "r+"); //r+ 读写文件，文件必须存在
-	if (NULL == fp)
-	{
+	if (NULL == fp) {
 		printf("func fopen（） err: %s \n", fname2);
 		return ;
 	}
 
 	fputs(a, fp);
 
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp);
 	}
 
@@ -31,11 +28,9 @@ void main03()
 	system("pause");
 }
 
-char * myfgets(char *mybuf, int nMax, FILE *fp)
-{
+char * myfgets(char *mybuf, int nMax, FILE *fp) {
 
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
 		return NULL;
 	}
 	strcpy(mybuf, "aaaaa");
@@ -44,8 +39,7 @@ char * myfgets(char *mybuf, int nMax, FILE *fp)
 	return mybuf;
 }
 
-void main04()
-{
+void main04() {
 	int i = 0;
 	FILE *fp = NULL;
 	char buf[100];
@@ -55,17 +49,14 @@ void main04()
 	char *fname2 = "c:/a1.txt"; //统一的用45度斜杠
 
 	fp = fopen(fname2, "r"); //不管文件是否存在，新建文件
-	if (NULL == fp)
-	{
+	if (NULL == fp) {
 		printf("func fopen（） err: \n");
 	}
 
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		//_cdecl fgets(_Out_z_cap_(_MaxCount) char * _Buf, _In_ int _MaxCount, _Inout_ FILE * _File);
 		p = fgets(buf, 100, fp);
-		if (p == NULL)
-		{
+		if (p == NULL) {
 			printf("func fgets() .....\n");
 			return ;
 		}
@@ -74,8 +65,7 @@ void main04()
 	}
 
 	
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp);
 	}
 
@@ -83,8 +73,7 @@ void main04()
 
 }
 
-void main()
-{
+void main() {
 	//main03();
 	main04();
 	system("pause");

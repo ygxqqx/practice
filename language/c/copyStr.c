@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-void main(){
+void main() {
 
 	char buf1[100] = {0};
 	char buf2[100] = {0};
@@ -13,7 +13,7 @@ void main(){
 	
 
 
-	while(*p1 != '\0'){
+	while(*p1 != '\0') {
 	
 		*p2++ = *p1++;
 	}

@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void main()
-{
+void main() {
 	//一行一行读取数据
 	int i = 0;
 	FILE *fp = NULL;
@@ -14,16 +13,13 @@ void main()
 	char *fname2 = "c:/demo.cpp"; //统一的用45度斜杠
 
 	fp = fopen(fname2, "r"); //不管文件是否存在，新建文件
-	if (NULL == fp)
-	{
+	if (NULL == fp) {
 		printf("func fopen（） err: \n");
 	}
 
-	while (!feof(fp))
-	{
+	while (!feof(fp)) {
 		p = fgets(buf, 100, fp);
-		if (p == NULL)
-		{
+		if (p == NULL) {
 			printf("func fgets() .....\n");
 			break ;
 		}
@@ -31,8 +27,7 @@ void main()
 	}
 
 	
-	if (fp != NULL)
-	{
+	if (fp != NULL) {
 		fclose(fp);
 	}
 

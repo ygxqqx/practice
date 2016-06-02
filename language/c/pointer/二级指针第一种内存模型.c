@@ -2,38 +2,30 @@
 #include "string.h"
 #include "stdlib.h"
 
-int printAarray(char **  pArray, int num)
-{
+int printAarray(char **pArray, int num) {
 	int i = 0;
 	
-	if (pArray == NULL)
-	{
+	if (pArray == NULL) {
 		return -1;
 	}
 
-	for (i=0; i<num; i++)
-	{
+	for (i=0; i<num; i++) {
 		printf("%s \n", pArray[i]);
 	}
 
 	return 0;
 }
 
-int sortArray(char **pArray, int num)
-{
+int sortArray(char **pArray, int num) {
 	char *tmp = NULL;
 	int i = 0, j = 0;
 	
-	if (pArray == NULL)
-	{
+	if (pArray == NULL) {
 		return -1;
 	}
-	for (i=0; i<num; i++)
-	{
-		for (j=i+1; j<num; j++)
-		{
-			if (strcmp(pArray[i], pArray[j]) > 0)
-			{
+	for (i=0; i<num; i++) {
+		for (j=i+1; j<num; j++) {
+			if (strcmp(pArray[i], pArray[j]) > 0) {
 				//交换的是数组元素 数组元素是指针
 				tmp = pArray[i];
 				pArray[i] = pArray[j];
@@ -42,8 +34,7 @@ int sortArray(char **pArray, int num)
 		}
 	}
 }
-void main()
-{
+void main() {
 	char *tmp = NULL;
 	int i = 0, j = 0;
 	//二级指针第一种内存模型
