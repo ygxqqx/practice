@@ -4,3 +4,5 @@ C++中的继承方式（public、private、protected）会影响子类的对外访问属性
 		2）看子类如何从父类继承（public、private、protected）	
 		3）看父类中的访问级别（public、private、protected）
 		综合练习
+
+

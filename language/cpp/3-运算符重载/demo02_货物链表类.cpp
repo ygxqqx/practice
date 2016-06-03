@@ -23,26 +23,26 @@ public :
 
 		return total_weight;
 	}  
-	Goods *next ;
+	Goods *next;
 private :
-	int weight ;
-	static int total_weight ;
+	int weight;
+	static int total_weight;
 } ;
 
-int Goods::total_weight = 0 ;
+int Goods::total_weight = 0;
 
 //业务操作函数 通过全局函数实现
 void purchase( Goods * &f, Goods *& r, int w ) {
 
-	Goods *p = new Goods(w) ; //用new 在堆中创建。
-	p -> next = NULL ;
+	Goods *p = new Goods(w); //用new 在堆中创建。
+	p -> next = NULL;
 	if ( f == NULL ) {
 
-		f = r = p ;
+		f = r = p;
 	} else {
 
-		r -> next = p;
-		r = r -> next; 
+		r->next = p;
+		r = r->next; 
 	}
 }
 
@@ -55,7 +55,7 @@ void sale( Goods * & f , Goods * & r ) {
 		return ; 
 	}
 	Goods *q = f ;  
-	f = f -> next ;  
+	f = f->next ;  
 	delete q ;//从堆上删除。
 	cout << "saled.\n" ;
 }

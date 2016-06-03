@@ -3,3 +3,4 @@
 public继承不会改变父类对外访问属性；
 private继承会改变父类对外访问属性为private；
 protected继承会部分改变父类对外访问属性。
+
