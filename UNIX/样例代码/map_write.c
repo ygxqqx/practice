@@ -5,14 +5,12 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <sys/mman.h>
-struct stu
-{
+struct stu {
 	char name[20];
 	int  age;
 	float score;
 };
-main()
-{
+main() {
 	int fd;
 	struct stu *s;//文件在虚拟内存的映射首地址
 	struct stat st;
@@ -20,11 +18,13 @@ main()
 	int count;//记录条数
 	int i;
 	//1.打开文件
-	fd=open("newstu.dat",O_RDWR|O_CREAT|O_EXCL,0666);
-	if(fd==-1)
-	{
-		fd=open("newstu.dat",O_RDWR);
-		if(fd==-1) printf("::%m\n"),exit(-1);
+	fd = open("newstu.dat",O_RDWR|O_CREAT|O_EXCL,0666);
+	if (fd == -1) {
+		fd = open("newstu.dat",O_RDWR);
+		if (fd==-1) {
+			printf("::%m\n");
+			exit(-1);
+		} 
 	}
 	//2.得到文件大小，文件记录条数
 	fstat(fd,&st);
@@ -46,8 +46,7 @@ main()
 	scanf("%f",&(s[count].score));
 	ftruncate(fd,size+sizeof(struct stu));
 	*/
-	for(i=0;i<count;i++)
-	{
+	for (i=0;i<count;i++) {
 		printf("%s,\t,%d,\t%.2f\n",
 			s[i].name,s[i].age,s[i].score);
 	}	

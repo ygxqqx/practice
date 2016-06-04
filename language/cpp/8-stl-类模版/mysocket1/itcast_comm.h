@@ -1,8 +1,3 @@
-
-//written by wangbaoming1999@163.com
-//20140323
-//dll export
-
 #ifndef _SOCEKETCLIET_H_
 #define _SOCEKETCLIET_H_
 

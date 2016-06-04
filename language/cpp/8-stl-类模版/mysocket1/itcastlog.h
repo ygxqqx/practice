@@ -1,9 +1,3 @@
-
-//written by wangbaoming1999@163.com
-//20140323
-//itcastlog.h 日志头文件
-
-
 #ifndef _ITCAST_LOG_H_
 #define _ITCAST_LOG_H_
 

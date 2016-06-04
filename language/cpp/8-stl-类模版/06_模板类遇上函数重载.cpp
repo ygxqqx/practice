@@ -2,8 +2,7 @@
 using namespace std;
 
 template<class T>
-class Complex
-{
+class Complex {
 public:
 	Complex(T  Real = 0,T Image=0 );
 protected:
@@ -12,15 +11,13 @@ private:
 };
 
 template<class T>
-Complex<T>::Complex(T  Real = 0, T Image=0 )
-{
+Complex<T>::Complex(T  Real = 0, T Image=0 ) {
 	this->Real = Real;
 	this->Image = Image;
 }
 
 
-void main()
-{
+void main() {
 	
 	system("pause");
 }

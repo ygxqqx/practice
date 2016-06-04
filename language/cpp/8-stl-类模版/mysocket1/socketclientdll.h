@@ -1,6 +1,3 @@
-
-//written by  wangbaoming1999@163.com
-//20140323 23:10
 /*
 下面定义了一套socket客户端发送报文接受报文的api接口
 请写出这套接口api的调用方法

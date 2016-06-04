@@ -24,8 +24,7 @@ int  LogLevel[5] = {IC_NO_LOG_LEVEL, IC_DEBUG_LEVEL, IC_INFO_LEVEL, IC_WARNING_L
 //Level的名称
 char ICLevelName[5][10] = {"NOLOG", "DEBUG", "INFO", "WARNING", "ERROR"};
 
-static int ITCAST_Error_GetCurTime(char* strTime)
-{
+static int ITCAST_Error_GetCurTime(char* strTime) {
 	struct tm*		tmTime = NULL;
 	size_t			timeLen = 0;
 	time_t			tTime = 0;	
@@ -38,8 +37,7 @@ static int ITCAST_Error_GetCurTime(char* strTime)
 	return timeLen;
 }
 
-static int ITCAST_Error_OpenFile(int* pf)
-{
+static int ITCAST_Error_OpenFile(int* pf) {
 	char	fileName[1024];
 	
 	memset(fileName, 0, sizeof(fileName));
@@ -50,16 +48,14 @@ static int ITCAST_Error_OpenFile(int* pf)
 #endif
     
     *pf = open(fileName, O_WRONLY|O_CREAT|O_APPEND, 0666);
-    if(*pf < 0)
-    {
+    if (*pf < 0) {
         return -1;
     }
 	
 	return 0;
 }
 
-static void ITCAST_Error_Core(const char *file, int line, int level, int status, const char *fmt, va_list args)
-{
+static void ITCAST_Error_Core(const char *file, int line, int level, int status, const char *fmt, va_list args) {
     char str[ITCAST_MAX_STRING_LEN];
     int	 strLen = 0;
     char tmpStr[64];
@@ -80,12 +76,9 @@ static void ITCAST_Error_Core(const char *file, int line, int level, int status,
     strLen += tmpStrLen;
     
     //加入LOG状态
-    if (status != 0) 
-    {
+    if (status != 0) {
         tmpStrLen = sprintf(str+strLen, "[ERRNO is %d] ", status);
-    }
-    else
-    {
+    } else {
     	tmpStrLen = sprintf(str+strLen, "[SUCCESS] ");
     }
     strLen += tmpStrLen;
@@ -103,30 +96,25 @@ static void ITCAST_Error_Core(const char *file, int line, int level, int status,
     strLen += tmpStrLen;
     
     //打开LOG文件
-    if(ITCAST_Error_OpenFile(&pf))
-	{
+    if (ITCAST_Error_OpenFile(&pf)) {
 		return ;
 	}
-	
     //写入LOG文件
     write(pf, str, strLen);
     //IC_Log_Error_WriteFile(str);
     
     //关闭文件
     close(pf);
-    
     return ;
 }
 
 
-void ITCAST_LOG(const char *file, int line, int level, int status, const char *fmt, ...)
-{
+void ITCAST_LOG(const char *file, int line, int level, int status, const char *fmt, ...) {
     va_list args;
 	
 	//判断是否需要写LOG
 //	if(level!=IC_DEBUG_LEVEL && level!=IC_INFO_LEVEL && level!=IC_WARNING_LEVEL && level!=IC_ERROR_LEVEL)
-	if(level == IC_NO_LOG_LEVEL)
-	{
+	if (level == IC_NO_LOG_LEVEL) {
 		return ;
 	}
 	
@@ -134,6 +122,5 @@ void ITCAST_LOG(const char *file, int line, int level, int status, const char *f
     va_start(args, fmt);
     ITCAST_Error_Core(file, line, level, status, fmt, args);
     va_end(args);
-    
     return ;
 }

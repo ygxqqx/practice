@@ -26,6 +26,7 @@ protected:
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(CAboutDlg::IDD) {
+	
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX) {

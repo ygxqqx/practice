@@ -5,14 +5,12 @@ using namespace std;
 
 
 
-void main01()
-{
+void main01() {
 	list<int> l;
 
 	cout<<l.size()<<endl;
 
-	for (int i=0; i<5; i++)
-	{
+	for (int i=0; i<5; i++) {
 		l.push_back(i+1);
 	}
 	cout<<l.size()<<endl;
@@ -20,8 +18,7 @@ void main01()
 	
 	list<int>::iterator current = l.begin();
 
-	while (current != l.end())
-	{
+	while (current != l.end()) {
 		cout<<*current<<endl;
 		current ++;
 	}
@@ -35,21 +32,19 @@ void main01()
 	l.insert(current, 100);
 
 	printf("\n插入位置测试，请你判断是从0位置开始，还是从1位置开始\n");
-	for (list<int>::iterator p = l.begin(); p!= l.end(); p++)
-	{
+	for (list<int>::iterator p = l.begin(); p!= l.end(); p++) {
 		cout<<*p<<" ";
 	
 	}
 	system("pause");
 }
-struct Teacher
-{
+
+struct Teacher {
 	char name[64];
 	int age;
 };
 
-void main02()
-{
+void main02() {
 	list<Teacher> l;
 
 	Teacher t1, t2, t3;
@@ -61,8 +56,7 @@ void main02()
 	l.push_back(t2);
 	l.push_back(t3);
 
-	for (list<Teacher>::iterator p = l.begin(); p!=l.end();p++)
-	{
+	for (list<Teacher>::iterator p = l.begin(); p!=l.end();p++) {
 		printf("tmp:%d ", p->age);
 	}
 	system("pause");
@@ -70,8 +64,7 @@ void main02()
 }
 
 
-void main()
-{
+void main() {
 	list<Teacher *> l;
 
 	Teacher t1, t2, t3;
@@ -83,11 +76,10 @@ void main()
 	l.push_back(&t2);
 	l.push_back(&t3);
 
-	for (list<Teacher *>::iterator p = l.begin(); p!=l.end();p++)
-	{
+	for (list<Teacher *>::iterator p = l.begin(); p!=l.end(); p++) {
 		Teacher * tmp  = *p;
 		printf("tmp:%d ", tmp->age);
 	}
-	system("pause");
 
+	system("pause");
 }

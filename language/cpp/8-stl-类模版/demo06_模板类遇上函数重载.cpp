@@ -2,16 +2,14 @@
 using namespace std;
 
 template<class T>
-class Complex
-{
+class Complex {
 public:
 	Complex(T  Real = 0,T Image=0 );
 	Complex(T a);
 	//Complex Complex<T>::operator+(Complex &c1, Complex &c2 )
 	friend  Complex operator+(Complex &c1, Complex &c2 );
 
-	friend Complex operator-(Complex &c1, Complex &c2 )
-	{
+	friend Complex operator-(Complex &c1, Complex &c2 ) {
 		Complex tmp(c1.Real-c2.Real, c1.Image - c2.Image);
 		return tmp;
 	}
@@ -26,21 +24,18 @@ private:
 };
 
 template<class T>
-Complex<T>::Complex(T  Real = 0, T Image=0 )
-{
+Complex<T>::Complex(T  Real = 0, T Image=0 ) {
 	this->Real = Real;
 	this->Image = Image;
 }
 
 template<class T>
-Complex<T>::Complex(T a)
-{
+Complex<T>::Complex(T a) {
 	this->Real = a; this->Image = 0;
 }
 
 template<class T>
-void Complex<T>::print()
-{
+void Complex<T>::print() {
 	cout<<this->Real<<" + "<<this->Image<<endl;
 };
 
@@ -61,19 +56,14 @@ Complex<T> operator+(Complex<T> &c1, Complex<T> &c2 )
 }
 */
 
-void main()
-{
+void main() {
+	
 	Complex<float> c1(1.0, 2.0);
 	Complex<float> c2(3.0, 4.0);
 	c1.print();
-
 	//Complex<float> c3 = c1 + c2;
 	//c3.print();
-
 	Complex<float> c4 = c1 - c2;
 	c4.print();
-	//
-	
-
 	system("pause");
 }

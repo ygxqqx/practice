@@ -1,7 +1,6 @@
 
 template<typename T>
-class A
-{
+class A {
 public:
 	static int m_a;
 protected:
@@ -17,8 +16,7 @@ int A<T>::m_a=0;
 #include "iostream"
 using namespace std;
 
-void main()
-{
+void main() {
 	A<int> a1;
 	A<int> a2;
 	A<int> a3;

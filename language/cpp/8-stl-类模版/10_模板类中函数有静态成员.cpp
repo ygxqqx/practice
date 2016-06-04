@@ -3,28 +3,38 @@ using namespace std;
 
 const double pi=3.14159;
 template<typename T> 
-class Circle
-{   
+class Circle {   
 	T radius ; 
 	static int total;			//类模板的静态数据成员
 public :
-	Circle(T r=0) { radius = r ; total++; }
-	void Set_Radius( T r ) { radius = r ; }
-	double Get_Radius()   { return  radius ; }
-	double Get_Girth()      { return  2 * pi * radius ; }
-	double Get_Area()       { return  pi * radius * radius ; }
+	Circle(T r=0) {
+		radius = r;
+		total++;
+	}
+	void Set_Radius( T r ) {
+		radius = r ;
+	}
+	double Get_Radius() {
+		return  radius ;
+	}
+	double Get_Girth() {
+		return  2 * pi * radius ;
+	}
+	double Get_Area() {
+		return  pi * radius * radius ;
+	}
 	static int ShowTotal();		//类模板的静态成员函数
 } ;
 
 template<typename T> 
 int Circle<T>::total=0;
 template<typename T> 
-int Circle<T>::ShowTotal()
-{ return total; } 
+int Circle<T>::ShowTotal() {
+	return total;
+} 
 
 
-void main()
-{
+void main() {
 	Circle<int> A, B ;		//建立了2个对象
 	A.Set_Radius( 16 ) ;
 	cout << "A.Radius = " << A.Get_Radius() << endl ;
