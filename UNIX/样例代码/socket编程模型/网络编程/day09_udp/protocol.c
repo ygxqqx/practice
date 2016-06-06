@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <netdb.h>
 #include <sys/utsname.h>
-main()
-{
+void main() {
 	struct protoent *ent;
 	struct utsname name;
 	ent=getprotobyname("tcp");
@@ -13,4 +12,5 @@ main()
 	printf("%s\n",name.nodename);
 	printf("%s\n",name.sysname);
 	printf("%s\n",name.domainname);
+	return 0;
 }

@@ -2,8 +2,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-main()
-{
+void main() {
 	/*
 	in_addr_t  nip=192<<24 | 168 <<16 | 0<<8  | 26;
 	char  *ip="192.168.0.26";
@@ -45,11 +44,5 @@ main()
 	
 	tmp.s_addr=host;
 	printf("%s\n",inet_ntoa(tmp));
-	
-	
-	
-	
-	
-	
-	
+	return 0;
 }
