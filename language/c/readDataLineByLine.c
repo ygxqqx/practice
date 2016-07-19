@@ -14,7 +14,7 @@ void main() {
 
 	fp = fopen(fname2, "r"); //不管文件是否存在，新建文件
 	if (NULL == fp) {
-		printf("func fopen（） err: \n");
+		printf("func fopen() err: \n");
 	}
 
 	while (!feof(fp)) {

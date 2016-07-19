@@ -32,7 +32,7 @@ void main5() {
 		memset(&student[i], 0, sizeof(Student));
 		sprintf(student[i].name, "name%d", i+1);
 
-		//把第二个参数组合的字符串，打印到第一个参数buf中。
+		//把第二个参数组合的字符串,打印到第一个参数buf中。
 		//sprintf(student[i].name,"name%d", i+1);
 		//fprintf(fp,"name%d", i+1);
 	}
@@ -47,7 +47,7 @@ void main5() {
 }
 
 
-void display() {   
+void display() {
 	FILE *fp;
 	int  i;
 
@@ -57,15 +57,15 @@ void display() {
 		//sprintf(student[i].name, "name%d", i+1);
 	}
 
-	if ((fp=fopen("c:/student.data","rb"))==NULL) {    
+	if ((fp=fopen("c:/student.data", "rb"))==NULL) {    
 		printf("cannot open file\n");
 		return;
 	}
 
-	for (i=0;i<SIZE;i++) {   
-		fread(&student[i],sizeof(Student),1,fp);
-		printf("%-10s %4d %4d %-15s\n",student[i].name,
-			student[i].num,student[i].age,student[i].addr);
+	for (i=0; i<SIZE; i++) {   
+		fread(&student[i], sizeof(Student), 1, fp);
+		printf("%-10s %4d %4d %-15s\n", student[i].name,
+			student[i].num, student[i].age, student[i].addr);
 	}
 	fclose(fp);
 }
