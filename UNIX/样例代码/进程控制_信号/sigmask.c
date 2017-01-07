@@ -4,7 +4,7 @@
 #include <unistd.h>
 void handle(int s)
 {
-	printf("–≈∫≈∏…»≈!\n");
+	printf("‰ø°Âè∑Âπ≤Êâ∞!\n");
 }
 main()
 {
@@ -23,7 +23,7 @@ main()
 	for(i=0;i<10;i++)
 	{
 		sum+=i;
-		sleep(5);//ƒ£ƒ‚“µŒÒ¥¶¿Ì ±º‰±»Ωœ≥§
+		sleep(5);//Ê®°Êãü‰∏öÂä°Â§ÑÁêÜÊó∂Èó¥ÊØîËæÉÈïø
 		sigsuspend(&sigt);
 		sleep(5);
 	}

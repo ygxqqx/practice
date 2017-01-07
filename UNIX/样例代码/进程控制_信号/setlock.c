@@ -7,17 +7,17 @@ main()
 	int fd;
 	struct flock lk;
 	int r;
-	//´ò¿ªÒ»¸öÎÄ¼ş
+	//æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
 	fd=open("a.txt",O_RDWR);
 	if(fd==-1) printf(":%m\n"),exit(-1);
-	//ÃèÊöËø
+	//æè¿°é”
 	lk.l_type=F_WRLCK;
 	lk.l_whence=SEEK_SET;
 	lk.l_start=5;
 	lk.l_len=10;
-	//¼ÓËø
+	//åŠ é”
 	r=fcntl(fd,F_SETLK,&lk);
-	if(r==0) printf("¼ÓËø³É¹¦£¡\n");
-	else	printf("¼ÓËøÊ§°Ü£¡\n");
+	if(r==0) printf("åŠ é”æˆåŠŸï¼\n");
+	else	printf("åŠ é”å¤±è´¥ï¼\n");
 	while(1);	
 }

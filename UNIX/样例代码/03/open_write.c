@@ -9,17 +9,17 @@ struct stu {
 	float score;
 };
 /*
-1.ÅĞ¶¨ÎÄ¼şÊÇ·ñ´æÔÚ,´æÔÚ´ò¿ª£¬²»´æÔÚ´´½¨
-2.ÊäÈë¼ÇÂ¼
-3.±£´æ¼ÇÂ¼
-4.ÌáÊ¾¼ÌĞøÊäÈë
-5.¼ÌĞø/²»¼ÌĞø
-6.¹Ø±ÕÎÄ¼ş
+1.åˆ¤å®šæ–‡ä»¶æ˜¯å¦å­˜åœ¨,å­˜åœ¨æ‰“å¼€ï¼Œä¸å­˜åœ¨åˆ›å»º
+2.è¾“å…¥è®°å½•
+3.ä¿å­˜è®°å½•
+4.æç¤ºç»§ç»­è¾“å…¥
+5.ç»§ç»­/ä¸ç»§ç»­
+6.å…³é—­æ–‡ä»¶
 */
 int openfile(const char *filename) {
 	int fd;
 	fd = open(filename, O_RDWR|O_CREAT|O_EXCL, 0666);
-	if (fd==-1) {//±íÊ¾ÎÄ¼ş´æÔÚ,Ôò´ò¿ª
+	if (fd==-1) {//è¡¨ç¤ºæ–‡ä»¶å­˜åœ¨,åˆ™æ‰“å¼€
 		fd = open(filename,O_RDWR|O_APPEND);
 		return fd;
 	}
@@ -27,11 +27,11 @@ int openfile(const char *filename) {
 }
 void input(struct stu *record) {
 	bzero(record, sizeof(struct stu));
-	printf("ÊäÈëÑ§ºÅ:");
+	printf("è¾“å…¥å­¦å·:");
 	scanf("%d", &(record->no));
-	printf("ÊäÈëĞÕÃû:");
+	printf("è¾“å…¥å§“å:");
 	scanf("%s", record->name);
-	printf("ÊäÈë³É¼¨:");
+	printf("è¾“å…¥æˆç»©:");
 	scanf("%f", &(record->score));
 }
 void save(int fd, struct stu *record) {
@@ -39,7 +39,7 @@ void save(int fd, struct stu *record) {
 }
 int iscontinue() {
 	char c;
-	printf("ÊÇ·ñ¼ÌĞøÊäÈë:\n");
+	printf("æ˜¯å¦ç»§ç»­è¾“å…¥:\n");
 	//fflush(stdin);
 	//fflush(stdout);
 	scanf("\n%c", &c);	
@@ -69,5 +69,5 @@ int main() {
 		system("clear");
 	}
 	close(fd);
-	printf("ÊäÈëÍê±Ï!\n");	
+	printf("è¾“å…¥å®Œæ¯•!\n");	
 }

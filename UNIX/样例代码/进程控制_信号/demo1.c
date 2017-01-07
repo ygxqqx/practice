@@ -21,7 +21,7 @@ void showtime(int s)
 		mvwprintw(wtime,1,1,"%02d:%02d:%02d",t->tm_hour,t->tm_min,t->tm_sec);
 		refresh();
 		wrefresh(wtime);
-		wrefresh(wnumb);//¿ÉÑ¡
+		wrefresh(wnumb);//å¯é€‰
 	}
 }
 

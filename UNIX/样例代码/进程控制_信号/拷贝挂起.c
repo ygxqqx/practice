@@ -4,9 +4,9 @@
 #include <unistd.h>
 void handle(int s)
 {
-	printf("Íâ²¿ÓÃ»§ÖĞ¶Ï´¦Àí...!\n");
+	printf("å¤–éƒ¨ç”¨æˆ·ä¸­æ–­å¤„ç†...!\n");
 	sleep(3);
-	printf("Íâ²¿ÓÃ»§ÖĞ¶Ï´¦ÀíÍê±Ï!\n");
+	printf("å¤–éƒ¨ç”¨æˆ·ä¸­æ–­å¤„ç†å®Œæ¯•!\n");
 }
 main()
 {
@@ -25,16 +25,16 @@ main()
 	sigprocmask(SIG_BLOCK,&sigs,0);
 	for(i=0;i<10;i++)
 	{			
-		printf("ÕıÔÚ¿½±´µçÓ°<%d>!\n",i);
-		sleep(5);//Ä£ÄâÒµÎñ´¦ÀíÊ±¼ä±È½Ï³¤
-		printf("ÕıÔÚ¿½±´µçÓ°<%d>Íê±Ï!\n",i);
+		printf("æ­£åœ¨æ‹·è´ç”µå½±<%d>!\n",i);
+		sleep(5);//æ¨¡æ‹Ÿä¸šåŠ¡å¤„ç†æ—¶é—´æ¯”è¾ƒé•¿
+		printf("æ­£åœ¨æ‹·è´ç”µå½±<%d>å®Œæ¯•!\n",i);
 		sigpending(&sigu);
 		if(sigismember(&sigu,SIGINT))
 		{
 			sigsuspend(&sigt);
 		}		
 	}
-	printf("ËùÓĞµçÓ°¿½±´Íê±Ï\n",sum);
+	printf("æ‰€æœ‰ç”µå½±æ‹·è´å®Œæ¯•\n",sum);
 	sigprocmask(SIG_UNBLOCK,&sigs,0);
 	printf("over!\n");
 }

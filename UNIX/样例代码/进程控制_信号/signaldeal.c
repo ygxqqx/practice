@@ -3,7 +3,7 @@
 #include <signal.h>
 void handle(int s)
 {
-	printf("ÎÒÊÇĞÅºÅ·¢Éú£¡\n");	
+	printf("æˆ‘æ˜¯ä¿¡å·å‘ç”Ÿï¼\n");	
 }
 
 main()
@@ -12,7 +12,7 @@ main()
 	signal(35,handle);
 	while(1)
 	{
-		//printf("½ø³ÌÔÚÖ´ĞĞ:%d!\n",getpid());
+		//printf("è¿›ç¨‹åœ¨æ‰§è¡Œ:%d!\n",getpid());
 		//sleep(1);
 	}
 }

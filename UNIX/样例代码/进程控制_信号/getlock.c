@@ -14,10 +14,10 @@ main()
 	
 	r=fcntl(fd,F_GETLK,&lk);
 	if(r==0) 
-		printf("µÃµ½Ëø³É¹¦!\n");
+		printf("å¾—åˆ°é”æˆåŠŸ!\n");
 	if(lk.l_type==F_WRLCK)
 	{
-		printf("Ğ´Ëø!\n");
+		printf("å†™é”!\n");
 	}
 	printf("start:%d,len:%d\n",lk.l_start,lk.l_len);
 	

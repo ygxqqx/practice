@@ -3,7 +3,7 @@
 #include <sys/time.h>
 void deal(int s)
 {
-	printf("Æð´²!\n");
+	printf("èµ·åºŠ!\n");
 	
 }
 main()

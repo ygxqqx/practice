@@ -11,15 +11,15 @@ void main() {
 	struct sockaddr_un addr;
 	int r;
 	char buf[100];
-	//1.½¨Á¢socket
+	//1.å»ºç«‹socket
 	sfd = socket(AF_UNIX,SOCK_STREAM,0);
 	if (sfd == -1) {
 		printf("socket err:%m\n");
 		exit(-1);
 	}
-	printf("½¨Á¢socket³É¹¦!\n");
+	printf("å»ºç«‹socketæˆåŠŸ!\n");
 	
-	//2.°ó¶¨µØÖ·
+	//2.ç»‘å®šåœ°å€
 	bzero(&addr, sizeof(addr));
 	addr.sun_family = AF_UNIX;
 	memcpy(addr.sun_path, "cs.sock", strlen("cs.sock")+1);
@@ -28,41 +28,41 @@ void main() {
 		printf("bind err:%m\n");
 		exit(-1);
 	}
-	printf("bind³É¹¦!\n");
+	printf("bindæˆåŠŸ!\n");
 	
-	//3.¼àÌı
+	//3.ç›‘å¬
 	r = listen(sfd, 10);
 	if (r == -1) {
 		printf("listen err:%m\n");
 		exit(-1);
 	}
-	printf("listen³É¹¦!\n");
+	printf("listenæˆåŠŸ!\n");
 	
-	//4.½ÓÊÕ¿Í»§
+	//4.æ¥æ”¶å®¢æˆ·
 	cfd = accept(sfd, 0, 0);
 	if (cfd == -1) {
 		printf("accept err:%m\n");
 		exit(-1);
 	}
-	printf("½¨Á¢Á¬½ÓÕßµÄ×´Ì¬³É¹¦!\n");
-	//5.½ÓÊÕÕâ¸ö¿Í»§µÄÊı¾İ
+	printf("å»ºç«‹è¿æ¥è€…çš„çŠ¶æ€æˆåŠŸ!\n");
+	//5.æ¥æ”¶è¿™ä¸ªå®¢æˆ·çš„æ•°æ®
 	while (1) {
 		r = read(cfd, buf, sizeof(buf));
 		if (r == 0) {
-			printf("Á¬½ÓÕßÍË³ö");
+			printf("è¿æ¥è€…é€€å‡º");
 			break;
 		}
 		if (r == -1) {
-			printf("scoket¹ÊÕÏ!\n");
+			printf("scoketæ•…éšœ!\n");
 			break;
 		}
 		buf[r] = 0;
 		printf("::%s\n", buf);
 		write(cfd, "Hi", 2);
 	}
-	//6.¹Ø±Õ¿Í»§
+	//6.å…³é—­å®¢æˆ·
 	close(cfd);
-	//7.¹Ø±ÕÕû¸ösocket
+	//7.å…³é—­æ•´ä¸ªsocket
 	close(sfd);
 	return 0;
 }

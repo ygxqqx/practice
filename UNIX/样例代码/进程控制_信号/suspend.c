@@ -4,7 +4,7 @@
 #include <unistd.h>
 void handle(int s)
 {
-	printf("–≈∫≈∏…»≈!\n");
+	printf("‰ø°Âè∑Âπ≤Êâ∞!\n");
 }
 main()
 {

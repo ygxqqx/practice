@@ -11,19 +11,19 @@ void main() {
 	int r;
 	//2
 	struct sockaddr_in addr = {0};
-	//1.½¨Á¢socket
+	//1.å»ºç«‹socket
 	//3
 	fd = socket(AF_INET, SOCK_DGRAM, 0);
-	//2.Á¬½Óµ½Ö¸¶¨µÄµØÖ·
+	//2.è¿æ¥åˆ°æŒ‡å®šçš„åœ°å€
 	//4
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(9999);
 	addr.sin_addr.s_addr = inet_addr("192.168.180.92");
 	
 	r = connect(fd, (struct sockaddr*)&addr, sizeof(addr));
-	//3.·¢ËÍÊı¾İ
+	//3.å‘é€æ•°æ®
 	write(fd, "Hello!Maomaochong!", strlen("Hello!Maomaochong!"));
-	//4.¹Ø±Õ
+	//4.å…³é—­
 	close(fd);dd
 	return 0;
 }

@@ -1,133 +1,133 @@
-�ع�:
-		1.�źŵ�����
-		2.�����ź�:
-					���ж�
-					�ɿ��벻�ɿ��ź�kill -l
-		3.�źŷ�����ע��kill/raise alarm  setitimer  signal
-		4.�źŵ�����sigprocmask		sigemptyset sigfillset ...
-		5.�ź����ε��л�
+回顾:
+		1.信号的作用
+		2.理解信号:
+					软中断
+					可靠与不可靠信号kill -l
+		3.信号发送与注册kill/raise alarm  setitimer  signal
+		4.信号的屏蔽sigprocmask		sigemptyset sigfillset ...
+		5.信号屏蔽的切换
 						sigpending
 						sigsuspend
 								=pause+
-								 ָ�������ź�
-						pause��sigsuspend���ر��ź��ж�.
-						�жϵ���pause��sigsuspen,���ǽ�������������
+								 指定屏蔽信号
+						pause与sigsuspend都回被信号中断.
+						中断的是pause与sigsuspen,不是进程中其他代码
 						
-						sigsuspend����sigprocmask������˼��:
-						5.1.sigsuspend�Ƿ�Ӱ��sigprocmask���ε��ź���?
-									Ӱ��.ʹԭ���������ź�ȫ��ʧЧ.
-									��sigsuspend����,�ָ�ԭ���������ź�.
-						5.2.sigsuspendʲôʱ��ʹ��?
+						sigsuspend放在sigprocmask环境中思考:
+						5.1.sigsuspend是否影响sigprocmask屏蔽的信号呢?
+									影响.使原来的屏蔽信号全部失效.
+									当sigsuspend返回,恢复原来的屏蔽信号.
+						5.2.sigsuspend什么时候使用?
 												
-һ.���°汾���źŷ����봦��
+一.最新版本的信号发送与处理
 		sigqueue/sigaction										 
-1.˼��:�ź��жϺ����������Ƿ������ź��ж�.								 	
-		�źź���������ֻ���α����ź�,�����������ź�.
-2.��ô��֤��������������ָ�����ź���?
-		sigaction����ָ�������������õ������ź�
-		sigaction�ڴ����źŵ�ʱ��,��������.
+1.思考:信号中断函数调用中是否被其他信号中断.								 	
+		信号函数调用中只屏蔽本身信号,不屏蔽其他信号.
+2.怎么保证函数调用中屏蔽指定的信号呢?
+		sigaction可以指定处理函数调用的屏蔽信号
+		sigaction在处理信号的时候,接受数据.
 		
-		sigqueue�����źŵ�ʱ��,���Է�������.
+		sigqueue发送信号的时候,可以发送数据.
 		
-		sigaction/sigqueue��signal/kill����ǿ�汾
+		sigaction/sigqueue是signal/kill的增强版本
 		
 		
-3.����˵��					
-		ʹ��sigaction/sigqueue����������.
-		3.1.�ȶ�
-		3.2.��ǿ����
+3.函数说明					
+		使用sigaction/sigqueue有两个理由.
+		3.1.稳定
+		3.2.增强功能
 	int sigaction(
-		int sig,//�������ź�
-		const struct sigaction*action,//���������������
-		struct sigaction*oldact//����ԭ���Ĵ��������ṹ��
+		int sig,//被处理信号
+		const struct sigaction*action,//处理函数及其参数
+		struct sigaction*oldact//返回原来的处理函数结构体
 		)
-	����:
-			0:�ɹ�
-			-1:ʧ��
+	返回:
+			0:成功
+			-1:失败
 	struct sigaction
 	{
 		void (*sa_handle)(int);
 		void (*sa_sigaction)(int,siginfo_t*,void*);
-		sigset_t *mask;//�����ź�
+		sigset_t *mask;//屏蔽信号
 		int flags;//SA_SIGINFO
-		void**//������Ա.
+		void**//保留成员.
 	}
-����:
-			1.ʹ��sigaction�����ź�,ʹ��kill�����ź�
-			2.ʹ��sigaction�����ź�,ʹ��sigqueue�����ź�
-			3.�����źŵ�ͬʱ��������			
-��.IPC
-		1.�����ļ�
-				1.1.�����ļ�
-				1.1.�����ļ�
-						1.1.1.�ܵ�
-								1.1.1.1.����
-								1.1.1.2.����
+案例:
+			1.使用sigaction处理信号,使用kill发送信号
+			2.使用sigaction处理信号,使用sigqueue发送信号
+			3.发送信号的同时处理数据			
+二.IPC
+		1.基于文件
+				1.1.无序文件
+				1.1.有序文件
+						1.1.1.管道
+								1.1.1.1.有名
+								1.1.1.2.匿名
 						1.1.2.socket
-		2.�����ڴ�
-				2.1.�����ڴ�
-						2.1.1.�����ڴ�
-						2.1.2.�����ڴ�
-				2.2.�����ڴ�
-						2.2.1.��������
-		3.ͬ��:�����ڴ�IPCӦ��(�����ڴ�����)
-				�ź���/�źŵ�
+		2.基于内存
+				2.1.无序内存
+						2.1.1.匿名内存
+						2.1.2.共享内存
+				2.2.有序内存
+						2.2.1.共享队列
+		3.同步:基于内存IPC应用(共享内存数组)
+				信号量/信号灯
 				
-��.������ͨ�ļ���IPC
-		IPC�ļ��������Ӧ�ñ���.
-		����֮����Ҫͬ������:
-		ͬ����Ҫͨ��.
-		��ͨ�ļ������������ͨ���ֶ�.
-		��ͨ�ļ�IPC����������:
-				һ�����̸ı��ļ�,����һ�������޷���֪.
-		�������:
-					һ��������ļ�:�ܵ��ļ�
-��.�ܵ��ļ�
-		1.�����ܵ�mkfifo
-		2.���ܵ��ļ��ص�
-	����:								
+三.基于普通文件的IPC
+		IPC的技术提出的应用背景.
+		进程之间需要同步处理:
+		同步需要通信.
+		普通文件就是最基本的通信手段.
+		普通文件IPC技术的问题:
+				一个进程改变文件,另外一个进程无法感知.
+		解决方案:
+					一个特殊的文件:管道文件
+四.管道文件
+		1.创建管道mkfifo
+		2.体会管道文件特点
+	案例:								
 			fifoA    			fifoB
-			�����ܵ�						
-			�򿪹ܵ�			�򿪹ܵ�
-			д����				������
-			�رչܵ�			�رչܵ�
-			ɾ���ܵ�
+			建立管道						
+			打开管道			打开管道
+			写数据				读数据
+			关闭管道			关闭管道
+			删除管道
 				
-	�����ܵ��ļ�:
-			ʹ��linux��ָ��mkfifo
+	建立管道文件:
+			使用linux的指令mkfifo
 	
-	�ܽ�:
-			1.readû������read����,����read�������Ǳ�ɾ��
-			2.��������
-			3.�򿪵��������ſ��Զ�д(two-way˫��)
-			4.�ܵ��ļ��رպ�,���ݲ��־�.
-			5.�ܵ������ݴ洢���ں˻�����.
-��.�����ܵ�
-		���������Ĺܵ������ֽ������ں�ʶ���Ƿ񷵻�ͬһ��fd�ı�ʾ.
-		���Ե��ܵ���ʧȥ��ʾ���õ�ʱ��,ʵ�ʿ��Բ�Ҫ����.
+	总结:
+			1.read没有数据read阻塞,而且read后数据是被删除
+			2.数据有序
+			3.打开的描述符号可以读写(two-way双工)
+			4.管道文件关闭后,数据不持久.
+			5.管道的数据存储在内核缓冲中.
+五.匿名管道
+		发现有名的管道的名字仅仅是内核识别是否返回同一个fd的标示.
+		所以当管道名失去表示作用的时候,实际可以不要名字.
 					
-		�ڸ��ӽ���֮��:���ļ������󴴽�����.
-		���ӽ��̶�����������.	�ܵ��ļ�û�м�ֵ.
-		�����ڸ��ӽ���������һ��û�����ֵĹܵ�:�����ܵ�.
-		����:
-				�����ܵ�ֻ��ʹ���ڸ��ӽ���.
+		在父子进程之间:打开文件描述后创建进程.
+		父子进程都有描述符号.	管道文件没有价值.
+		所以在父子进程中引入一个没有名字的管道:匿名管道.
+		结论:
+				匿名管道只能使用在父子进程.
 		
-		1.���������ܵ�
-		2.ʹ�������ܵ�
-����:
-		�����ܵ��Ĵ���
-		��������ܵ����ص�
-		int pipe(int fd[2]);//�����ܵ�.�򿪹ܵ�.�����ܵ�.�رն�д		
-		fd[0]:ֻ��(����д)
-		fd[1]:ֻд(���ܶ�)	
+		1.创建匿名管道
+		2.使用匿名管道
+案例:
+		匿名管道的创建
+		体会匿名管道的特点
+		int pipe(int fd[2]);//创建管道.打开管道.拷贝管道.关闭读写		
+		fd[0]:只读(不能写)
+		fd[1]:只写(不能读)	
 		
-		ע��:�����ޱ߽�.
+		注意:数据无边界.
 		
-�ۺ�:
-		���������ӽ���:
-			һ���������1-5000������
-			����һ���������5001-10000
-			�����̸���洢
+综合:
+		建立两个子进程:
+			一个负责计算1-5000的素数
+			另外一个负责计算5001-10000
+			父进程负责存储
 		
 		
 											

@@ -5,18 +5,18 @@
 main() {
 	DIR *d;
 	struct dirent *de;
-	//打开目录
+	//鎵撳紑鐩綍
 	d = opendir("/home");
 	if (d == NULL) {
 		printf("opendir:%m\n");
 		exit(-1);
 	}
-	//循环读取目录
+	//寰幆璇诲彇鐩綍
 	while (de=readdir(d)) {
 		printf("%s,\t%d\n",de->d_name,de->d_type);
 	}
 	
-	//关闭目录
+	//鍏抽棴鐩綍
 	closedir(d);
 	
 }

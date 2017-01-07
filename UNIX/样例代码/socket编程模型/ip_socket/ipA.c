@@ -10,29 +10,29 @@ void main() {
 	int fd;
 	int r;
 	char buf[200];
-	//1.½¨Á¢socket
+	//1.å»ºç«‹socket
 	//2
 	fd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (fd == -1) {
 		printf("socket err:%m\n");
 		exit(-1);
 	}
-	printf("socket³É¹¦!\n");
-	//2.¹¹Ôì±¾µØÎÄ¼şµØÖ·
+	printf("socketæˆåŠŸ!\n");
+	//2.æ„é€ æœ¬åœ°æ–‡ä»¶åœ°å€
 	//3.
 	struct sockaddr_in addr = {0};
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(9999);
 	addr.sin_addr.s_addr = inet_addr("192.168.180.92");
-	//3.°Ñsocket°ó¶¨ÔÚµØÖ·ÉÏ
+	//3.æŠŠsocketç»‘å®šåœ¨åœ°å€ä¸Š
 	r = bind(fd, (struct sockaddr*)&addr, sizeof(addr));
 	if (r == -1) {
 		printf("bind err:%m\n");
 		exit(-1);
 	}
-	printf("µØÖ·°ó¶¨³É¹¦!\n");
+	printf("åœ°å€ç»‘å®šæˆåŠŸ!\n");
 	
-	//4.½ÓÊÕÊı¾İ
+	//4.æ¥æ”¶æ•°æ®
 	while (1) {
 		bzero(buf, sizeof(buf));
 		r = read(fd, buf, sizeof(buf));
@@ -40,9 +40,9 @@ void main() {
 		printf("%s\n", buf);
 	}	
 	
-	//5.¹Ø±Õ
+	//5.å…³é—­
 	close(fd);
-	//6.É¾³ısocketÎÄ¼ş
+	//6.åˆ é™¤socketæ–‡ä»¶
 	unlink("my.sock");
 	return 0;
 }
