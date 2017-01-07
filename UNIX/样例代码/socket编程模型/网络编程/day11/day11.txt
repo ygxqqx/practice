@@ -1,136 +1,136 @@
-»Ø¹Ë£º
-		¶à½ø³ÌµÄÎÊÌâ£ºÊý¾Ý¹²Ïí¡£
-		¶à½ø³ÌµÄÎÊÌâ£º	½ø³ÌµÄÉÏÏÂÎÄ»·¾³(context)
-										ÎÄ¼þÃèÊö·ûºÅÊÇÕûÊýÒÔ¼°¶ÔÓ¦ÉÏÏÂÎÄ»·¾³
-		¶à½ø³ÌµÄÎÊÌâ£ºÉÏÏÂÎÄ»·¾³¹²Ïí
+å›žé¡¾ï¼š
+		å¤šè¿›ç¨‹çš„é—®é¢˜ï¼šæ•°æ®å…±äº«ã€‚
+		å¤šè¿›ç¨‹çš„é—®é¢˜ï¼š	è¿›ç¨‹çš„ä¸Šä¸‹æ–‡çŽ¯å¢ƒ(context)
+										æ–‡ä»¶æè¿°ç¬¦å·æ˜¯æ•´æ•°ä»¥åŠå¯¹åº”ä¸Šä¸‹æ–‡çŽ¯å¢ƒ
+		å¤šè¿›ç¨‹çš„é—®é¢˜ï¼šä¸Šä¸‹æ–‡çŽ¯å¢ƒå…±äº«
 
-Ò».SELECT TCP·þÎñÆ÷±à³ÌÄ£Ê½
-	1.selectº¯Êý
+ä¸€.SELECT TCPæœåŠ¡å™¨ç¼–ç¨‹æ¨¡å¼
+	1.selectå‡½æ•°
 		int select(
-			int fds,//½¨ÒéÊÇ¼à¿ØµÄÎÄ¼þÃèÊö·ûºÅµÄ×î´óÖµ+1
-			fd_set *readfds,//¶ÁÎÄ¼þÃèÊö·ûºÅ¼¯ºÏ
-											//¸Ã²ÎÊý¼ÈÊÇÊäÈë£¬Ò²ÊÇÊä³ö
-											//ÊäÈë£º±»¼à¿ØµÄÃèÊö·ûºÅ
-											//Êä³ö£ºÓÐÊý¾ÝµÄÃèÊö·ûºÅ
+			int fds,//å»ºè®®æ˜¯ç›‘æŽ§çš„æ–‡ä»¶æè¿°ç¬¦å·çš„æœ€å¤§å€¼+1
+			fd_set *readfds,//è¯»æ–‡ä»¶æè¿°ç¬¦å·é›†åˆ
+											//è¯¥å‚æ•°æ—¢æ˜¯è¾“å…¥ï¼Œä¹Ÿæ˜¯è¾“å‡º
+											//è¾“å…¥ï¼šè¢«ç›‘æŽ§çš„æè¿°ç¬¦å·
+											//è¾“å‡ºï¼šæœ‰æ•°æ®çš„æè¿°ç¬¦å·
 			fd_set *writefds,
 			fd_set *errfds,
-			struct timeval*timeout);//Ö¸¶¨×èÈûÊ±¼äÏÞÖÆ
-															//ÎªNULL,ÓÀ¾Ã
-		·µ»Ø£º
-				>0:·¢Éú¸Ä±äµÄÎÄ¼þÃèÊö·ûºÅ¸öÊý
-				=0:Ê±¼äÏÞÖÆ¹ýÆÚ
-			 =-1:Òì³£															
-	2.IOÄÜ·ñ·¢³öÐÅºÅ£¿
-			Òì²½IO¾ÍÊÇÍ¨¹ýÐÅºÅ¹¤×÷.
-	3.Ó¦ÓÃÊ¹ÓÃselect
-	4.Ê¹ÓÃselectÊµÏÖTCPµÄ¶à¿Í»§Á¬½ÓÓë´¦Àí
-	5.pollÄ£Ê½
+			struct timeval*timeout);//æŒ‡å®šé˜»å¡žæ—¶é—´é™åˆ¶
+															//ä¸ºNULL,æ°¸ä¹…
+		è¿”å›žï¼š
+				>0:å‘ç”Ÿæ”¹å˜çš„æ–‡ä»¶æè¿°ç¬¦å·ä¸ªæ•°
+				=0:æ—¶é—´é™åˆ¶è¿‡æœŸ
+			 =-1:å¼‚å¸¸															
+	2.IOèƒ½å¦å‘å‡ºä¿¡å·ï¼Ÿ
+			å¼‚æ­¥IOå°±æ˜¯é€šè¿‡ä¿¡å·å·¥ä½œ.
+	3.åº”ç”¨ä½¿ç”¨select
+	4.ä½¿ç”¨selectå®žçŽ°TCPçš„å¤šå®¢æˆ·è¿žæŽ¥ä¸Žå¤„ç†
+	5.pollæ¨¡å¼
 		int poll(
-				struct pollfd *fds,//¼à¿ØµÄÃèÊö·ûºÅ
-				int nfds,//¼à¿ØµÄÃèÊö·ûºÅµÄ¸öÊý
-				int timeout	);	//×èÈû³¬Ê±
+				struct pollfd *fds,//ç›‘æŽ§çš„æè¿°ç¬¦å·
+				int nfds,//ç›‘æŽ§çš„æè¿°ç¬¦å·çš„ä¸ªæ•°
+				int timeout	);	//é˜»å¡žè¶…æ—¶
 			
-¶þ.SocketÑ¡ÏîÉèÖÃ
-		1.socketÓÐÄÄÐ©Ñ¡Ïî¿ÉÒÔÉèÖÃ
+äºŒ.Socketé€‰é¡¹è®¾ç½®
+		1.socketæœ‰å“ªäº›é€‰é¡¹å¯ä»¥è®¾ç½®
 					ARP
 					 |
 					IP
 					 |
 		|-----------------|
 		UDP			         TCP 			 
-		Í¨ÓÃÑ¡Ïî:
+		é€šç”¨é€‰é¡¹:
 				SOL_SOCKET	
-						SO_BROADCAST		¹ã²¥
-						SO_RCVBUF				ÃèÊö·ûºÅµÄ»º³åµÄ´óÐ¡
-						SO_SNDBUF				ÃèÊö·ûºÅµÄ»º³åµÄ´óÐ¡
-						SO_REUSEADDR		µØÖ··´¸´°ó¶¨
-						SO_TYPE					ÃèÊö·ûºÅÀàÐÍSOCK_STREAM SOCK_DGRAM?
-		ICMPÑ¡Ïî
+						SO_BROADCAST		å¹¿æ’­
+						SO_RCVBUF				æè¿°ç¬¦å·çš„ç¼“å†²çš„å¤§å°
+						SO_SNDBUF				æè¿°ç¬¦å·çš„ç¼“å†²çš„å¤§å°
+						SO_REUSEADDR		åœ°å€åå¤ç»‘å®š
+						SO_TYPE					æè¿°ç¬¦å·ç±»åž‹SOCK_STREAM SOCK_DGRAM?
+		ICMPé€‰é¡¹
 				IPPTOTO_ICMP
 						ICMP_FILTER
-		IPÑ¡Ïî(¸ÉÔ¤ÏµÍ³Éú³ÉIPÍ·)
+		IPé€‰é¡¹(å¹²é¢„ç³»ç»Ÿç”ŸæˆIPå¤´)
 				IPPROTO_IP
 						......
 						......
-		UDPÑ¡Ïî
+		UDPé€‰é¡¹
 				IPPROTO_UDP
 						......
 		
-		TCPÑ¡Ïî				
+		TCPé€‰é¡¹				
 				IPPROTO_TCP
 						......						
-		setsockoptÉèÖÃÑ¡Ïî
-		getsockopt»ñÈ¡Ñ¡Ïî
-°¸Àý£º
-		ÅÐ¶¨Ò»¸ösocketµÄÊý¾ÝÀàÐÍAF_INET:SOCK_STREAM	 SOCK_DGRAM SOCK_RAW
+		setsockoptè®¾ç½®é€‰é¡¹
+		getsockoptèŽ·å–é€‰é¡¹
+æ¡ˆä¾‹ï¼š
+		åˆ¤å®šä¸€ä¸ªsocketçš„æ•°æ®ç±»åž‹AF_INET:SOCK_STREAM	 SOCK_DGRAM SOCK_RAW
 
-°¸Àý£º
-		Ê¹ÓÃÑ¡Ïî½øÐÐÊý¾Ý¹ã²¥.
-		cast_A·¢ËÍ
-				½¨Á¢socket
-				ÉèÖÃ¹ã²¥Ñ¡Ïî
-				·¢ËÍÊý¾Ý(¹ã²¥·½Ê½·¢ËÍ)
+æ¡ˆä¾‹ï¼š
+		ä½¿ç”¨é€‰é¡¹è¿›è¡Œæ•°æ®å¹¿æ’­.
+		cast_Aå‘é€
+				å»ºç«‹socket
+				è®¾ç½®å¹¿æ’­é€‰é¡¹
+				å‘é€æ•°æ®(å¹¿æ’­æ–¹å¼å‘é€)
 				
-		case_B½ÓÊÕ
-				½¨Á¢socket
-				ÉèÖÃµØÖ·¿ÉÖØÓÃÑ¡Ïî
-				°ó¶¨µØÖ·
-				½ÓÊÕÊý¾Ý			
+		case_BæŽ¥æ”¶
+				å»ºç«‹socket
+				è®¾ç½®åœ°å€å¯é‡ç”¨é€‰é¡¹
+				ç»‘å®šåœ°å€
+				æŽ¥æ”¶æ•°æ®			
 				
-Èý.OOBÊý¾Ý(TCP)		
-		ÓÅÏÈÊý¾Ý
+ä¸‰.OOBæ•°æ®(TCP)		
+		ä¼˜å…ˆæ•°æ®
 		send(,MSG_OOB);
 		recv(,MSG_OOB);
-°¸Àý£º
+æ¡ˆä¾‹ï¼š
 		oob_server.c
 					recv	MSG_OOB
 		oob_client.c	
 					send	MSG_OOB
 
-		1.OOBÊý¾ÝÖ»ÄÜÒ»¸ö×Ö·û
-		2.ÆÕÍ¨Êý¾ÝÊ¹ÓÃÒ»°ã·½Ê½½ÓÊÕÓë·¢ËÍ£¬OOBÊý¾ÝÊ¹ÓÃMSG_OOB½ÓÊÕÓë·¢ËÍ
-		3.Ò»¸öÊý¾ÝÊ¹ÓÃMSG_OOB£¬Ôò×îºóÒ»¸öÊÇOOB£¬ÆäËû·ÇOOBÊý¾Ý
-		4.ÎÊÌâ£ºOOBÊý¾ÝÊÇÓÅÏÈÊý¾Ý¡£ÓÅÏÈÌåÏÖÔÚÊ²Ã´µØ·½£¿
+		1.OOBæ•°æ®åªèƒ½ä¸€ä¸ªå­—ç¬¦
+		2.æ™®é€šæ•°æ®ä½¿ç”¨ä¸€èˆ¬æ–¹å¼æŽ¥æ”¶ä¸Žå‘é€ï¼ŒOOBæ•°æ®ä½¿ç”¨MSG_OOBæŽ¥æ”¶ä¸Žå‘é€
+		3.ä¸€ä¸ªæ•°æ®ä½¿ç”¨MSG_OOBï¼Œåˆ™æœ€åŽä¸€ä¸ªæ˜¯OOBï¼Œå…¶ä»–éžOOBæ•°æ®
+		4.é—®é¢˜ï¼šOOBæ•°æ®æ˜¯ä¼˜å…ˆæ•°æ®ã€‚ä¼˜å…ˆä½“çŽ°åœ¨ä»€ä¹ˆåœ°æ–¹ï¼Ÿ
 			
-ËÄ.HTTPÐ­ÒéÒÔ¼°Ó¦ÓÃ												
-	1.HTTPÐ­Òé°æ±¾HTTP1.0 HTTP1.1	
-	2.HTTPÊÇÓ¦ÓÃÐ­Òé
-	3.HTTPÐ­Òé·Ö³É£º
-				ÇëÇóÐ­Òé
-				ÏìÓ¦Ð­Òé
-	4.ÇëÇóÐ­ÒéµÄ¸ñÊ½£º
-			ÇëÇóÐÐ(ÇëÇó·½·¨ ÇëÇó×ÊÔ´ Ð­Òé°æ±¾)  
-			ÇëÇóÌå£¨ÇëÇóÍ·:ÇëÇóÖµ£©
-			¿ÕÐÐ
-			Êý¾Ý(querystring:key=value&key=value)
-	5.ÏìÓ¦Ð­ÒéµÄ¸ñÊ½
-			ÏìÓ¦ÐÐ(Ð­Òé°æ±¾ ÏìÓ¦Âë ÏìÓ¦ÂëµÄÎÄ±¾ÃèÊö)
-			ÏìÓ¦Ìå(ÏìÓ¦Í·: ÏìÓ¦Öµ)
-			¿ÕÐÐ
-			Êý¾Ý£¨ÆÕÍ¨Êý¾Ý/·Ö¿éÊý¾Ý£©
+å››.HTTPåè®®ä»¥åŠåº”ç”¨												
+	1.HTTPåè®®ç‰ˆæœ¬HTTP1.0 HTTP1.1	
+	2.HTTPæ˜¯åº”ç”¨åè®®
+	3.HTTPåè®®åˆ†æˆï¼š
+				è¯·æ±‚åè®®
+				å“åº”åè®®
+	4.è¯·æ±‚åè®®çš„æ ¼å¼ï¼š
+			è¯·æ±‚è¡Œ(è¯·æ±‚æ–¹æ³• è¯·æ±‚èµ„æº åè®®ç‰ˆæœ¬)  
+			è¯·æ±‚ä½“ï¼ˆè¯·æ±‚å¤´:è¯·æ±‚å€¼ï¼‰
+			ç©ºè¡Œ
+			æ•°æ®(querystring:key=value&key=value)
+	5.å“åº”åè®®çš„æ ¼å¼
+			å“åº”è¡Œ(åè®®ç‰ˆæœ¬ å“åº”ç  å“åº”ç çš„æ–‡æœ¬æè¿°)
+			å“åº”ä½“(å“åº”å¤´: å“åº”å€¼)
+			ç©ºè¡Œ
+			æ•°æ®ï¼ˆæ™®é€šæ•°æ®/åˆ†å—æ•°æ®ï¼‰
 					
- 		1XX 	ÕýÔÚ´¦Àí
- 		2XX		ÏìÓ¦³É¹¦200
- 		3XX		¼ÌÐø´¦Àí
- 		4XX		¿Í»§´íÎó
- 		5XX		·þÎñÆ÷´íÎó
-Îå.ioctlº¯Êý
-		ÊµÏÖifconfig¹¤¾ß
+ 		1XX 	æ­£åœ¨å¤„ç†
+ 		2XX		å“åº”æˆåŠŸ200
+ 		3XX		ç»§ç»­å¤„ç†
+ 		4XX		å®¢æˆ·é”™è¯¯
+ 		5XX		æœåŠ¡å™¨é”™è¯¯
+äº”.ioctlå‡½æ•°
+		å®žçŽ°ifconfigå·¥å…·
 		
-×Ü½á:
-		ÖØµã:
+æ€»ç»“:
+		é‡ç‚¹:
 				select
-				¹ã²¥
+				å¹¿æ’­
 				
-		ÁË½â:
-				OOBÊý¾Ý
-				HTTPÐ­Òé
+		äº†è§£:
+				OOBæ•°æ®
+				HTTPåè®®
 		
-		Ó¦ÓÃ:
-				¶ÀÁ¢±àÐ´TCP·þÎñÆ÷¶ËµÄselectÄ£Ê½
-				±àÐ´¹ã²¥
-				ÄÜ¹»ÇëÇóÒ»¸öÍøÒ³,²¢ÇÒ½âÎöÏìÓ¦
-×÷Òµ:
-		1.°ÑÁÄÌì³ÌÐòÊ¹ÓÃpollÊµÏÖ
-		2.Ê¹ÓÃUDPµÄ¹ã²¥,·¢ËÍÒ»¸öÎÄ¼þ				
-		3.ËæÒâÌôÑ¡ÍøÕ¾,°ÑÖ÷Ò³ÏÂÔØ²¢±£´æ³ÉhtmlÎÄ¼þ
+		åº”ç”¨:
+				ç‹¬ç«‹ç¼–å†™TCPæœåŠ¡å™¨ç«¯çš„selectæ¨¡å¼
+				ç¼–å†™å¹¿æ’­
+				èƒ½å¤Ÿè¯·æ±‚ä¸€ä¸ªç½‘é¡µ,å¹¶ä¸”è§£æžå“åº”
+ä½œä¸š:
+		1.æŠŠèŠå¤©ç¨‹åºä½¿ç”¨pollå®žçŽ°
+		2.ä½¿ç”¨UDPçš„å¹¿æ’­,å‘é€ä¸€ä¸ªæ–‡ä»¶				
+		3.éšæ„æŒ‘é€‰ç½‘ç«™,æŠŠä¸»é¡µä¸‹è½½å¹¶ä¿å­˜æˆhtmlæ–‡ä»¶

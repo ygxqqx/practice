@@ -14,7 +14,7 @@ main()
 	//1.socket
 	fd=socket(AF_INET,SOCK_STREAM,0);
 	if(fd==-1) printf("1:%m\n"),exit(-1);
-	printf("½¨Á¢socket³É¹¦!\n");
+	printf("å»ºç«‹socketæˆåŠŸ!\n");
 	//2.connect
 	addr.sin_family=AF_INET;
 	addr.sin_port=htons(9999);
@@ -22,7 +22,7 @@ main()
 	r=connect(fd,
 			(struct sockaddr*)&addr,sizeof(addr));
 	if(r==-1) printf("2:%m\n"),exit(-1);
-	printf("Á¬½Ó·şÎñÆ÷³É¹¦!\n");
+	printf("è¿æ¥æœåŠ¡å™¨æˆåŠŸ!\n");
 	
 	
 	for(i=0;i<20;i++)

@@ -6,12 +6,12 @@
 #include <netinet/in.h>
 
 void main() {
-	int fd;//socketÃèÊö·ûºÅ
-	struct sockaddr_in ad;//±¾»úµÄIPµØÖ·
-	char buf[100];//½ÓÊÕÊı¾İ»º³å
+	int fd;//socketæè¿°ç¬¦å·
+	struct sockaddr_in ad;//æœ¬æœºçš„IPåœ°å€
+	char buf[100];//æ¥æ”¶æ•°æ®ç¼“å†²
 	
-	struct sockaddr_in ad_snd;//·¢ËÍÕßIPµØÖ·
-	socklen_t len;//·¢ËÍÕßIPµÄ³¤¶È
+	struct sockaddr_in ad_snd;//å‘é€è€…IPåœ°å€
+	socklen_t len;//å‘é€è€…IPçš„é•¿åº¦
 	int r;
 	
 	fd = socket(AF_INET, SOCK_DGRAM, 17);
@@ -19,7 +19,7 @@ void main() {
 		printf("socket:%m\n");
 		exit(-1);
 	}
-	printf("½¨Á¢socket³É¹¦!\n");
+	printf("å»ºç«‹socketæˆåŠŸ!\n");
 	ad.sin_family = AF_INET;
 	ad.sin_port = htons(11111);
 	inet_aton("192.168.180.92", &ad.sin_addr);
@@ -28,24 +28,24 @@ void main() {
 		printf("bind err:%m\n");
 		exit(-1);
 	}
-	printf("°ó¶¨³É¹¦!\n");
+	printf("ç»‘å®šæˆåŠŸ!\n");
 	while (1) {
 		len = sizeof(ad_snd);
 		r = recvfrom(fd, buf, sizeof(buf)-1, 0, (struct sockaddr*)&ad_snd, &len);
 		if (r > 0){
 			buf[r] = 0;
-			printf("·¢ËÍÕßIP:%s,¶Ë¿Ú:%hu,Êı¾İ:%s\n",
+			printf("å‘é€è€…IP:%s,ç«¯å£:%hu,æ•°æ®:%s\n",
 				inet_ntoa(ad_snd.sin_addr),
 				ntohs(ad_snd.sin_port), buf);
-			sendto(fd,"¹Å¹Ö!",strlen("¹Å¹Ö!"),0,
+			sendto(fd,"å¤æ€ª!",strlen("å¤æ€ª!"),0,
 			(struct sockaddr*)&ad_snd, sizeof(ad_snd));
 		}
 		if (r == 0) {
-			printf("¹Ø±Õ!\n");			
+			printf("å…³é—­!\n");			
 			break;
 		}
 		if (r == -1) {
-			printf("ÍøÂç¹ÊÕÏ!\n");			
+			printf("ç½‘ç»œæ•…éšœ!\n");			
 			break;
 		}
 	}

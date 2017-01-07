@@ -9,21 +9,21 @@ void main() {
 	int r;
 	char buf[100];
 	struct sockaddr_un addr = {0};
-	//1.½¨Á¢socket
+	//1.å»ºç«‹socket
 	//fd=socket(AF_UNIX,SOCK_DGRAM,0);
 	fd = socket(AF_UNIX,SOCK_STREAM, 0);
-	//2.Á¬½Óµ½Ö¸¶¨µÄµØÖ·
+	//2.è¿æ¥åˆ°æŒ‡å®šçš„åœ°å€
 	addr.sun_family = AF_UNIX;
 	memcpy(addr.sun_path, "cs.sock", strlen("cs.sock"));
 	r = connect(fd, (struct sockaddr*)&addr, sizeof(addr));
-	//3.·¢ËÍÊı¾İ
+	//3.å‘é€æ•°æ®
 	while (1) {
 		write(fd, "Hello!MaomaoYu!", strlen("Hello!MaomaoYu!"));
 		read(fd, buf, 100);
 		printf("%s\n", buf);
 		sleep(1);	
 	}
-	//4.¹Ø±Õ
+	//4.å…³é—­
 	close(fd);
 	return 0;
 }

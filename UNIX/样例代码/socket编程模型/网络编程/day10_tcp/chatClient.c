@@ -25,14 +25,14 @@ void handle(int s)
 }
 main()
 {	
-	//printf("ÍøÂç³õÊ¼»¯³É¹¦!\n");
+	//printf("ç½‘ç»œåˆå§‹åŒ–æˆåŠŸ!\n");
 	initUI();
 	r=initSocket();	
 	if(r==-1) exit(-1);
 	signal(SIGCHLD,handle);
 	if(fork())
 	{
-		//ÊäÈë£¬·¢ËÍ
+		//è¾“å…¥ï¼Œå‘é€
 		char buf[256];
 		while(1)
 		{
@@ -49,7 +49,7 @@ main()
 	else
 	{
 		
-		//½ÓÊÕ£¬ÏÔÊ¾
+		//æ¥æ”¶ï¼Œæ˜¾ç¤º
 		char buf[256];
 		int line=1;
 		while(1)

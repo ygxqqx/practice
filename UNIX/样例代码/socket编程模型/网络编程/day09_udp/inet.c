@@ -6,7 +6,7 @@ void main() {
 	/*
 	in_addr_t  nip=192<<24 | 168 <<16 | 0<<8  | 26;
 	char  *ip="192.168.0.26";
-	//把整数转换为字符串inet_ntoa
+	//鎶婃暣鏁拌浆鎹负瀛楃涓瞚net_ntoa
 	struct in_addr sip;
 	int myip;
 	

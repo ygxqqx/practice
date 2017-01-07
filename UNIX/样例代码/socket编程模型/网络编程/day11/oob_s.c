@@ -52,7 +52,7 @@ main()
 		if(r>0)
 		{
 			buf[r]=0;
-			printf("½ÓÊÕÊı¾İ£º%s\n",buf);
+			printf("æ¥æ”¶æ•°æ®ï¼š%s\n",buf);
 		}		
 		else
 		{

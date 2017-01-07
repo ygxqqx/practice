@@ -20,29 +20,29 @@ main()
 	struct sockaddr_in dr;
 	char filename[]="udp_a.c"; 
 	
-	//1.½¨Á¢socket
+	//1.å»ºç«‹socket
 	sfd=socket(AF_INET,SOCK_STREAM,0);
 	if(sfd==-1) printf("1:%m\n"),exit(-1);
-	printf("socket³É¹¦!\n");
-	//2.Á¬½Óµ½·şÎñÆ÷
+	printf("socketæˆåŠŸ!\n");
+	//2.è¿æ¥åˆ°æœåŠ¡å™¨
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(9988);
 	inet_aton("192.168.180.92",&dr.sin_addr);
 	r=connect(sfd,(struct sockaddr*)&dr,sizeof(dr));
 	if(r==-1) printf("2:%m\n"),close(sfd),exit(-1);	
-	printf("connect³É¹¦!\n");
-	//3.´ò¿ªÎÄ¼ş
+	printf("connectæˆåŠŸ!\n");
+	//3.æ‰“å¼€æ–‡ä»¶
 	ffd=open(filename,O_RDONLY);
 	if(ffd==-1) printf("3:%m\n"),close(sfd),exit(-1);
-	printf("openÎÄ¼ş³É¹¦!\n");
-	//4.·¢ËÍÎÄ¼şÃû
+	printf("openæ–‡ä»¶æˆåŠŸ!\n");
+	//4.å‘é€æ–‡ä»¶å
 	len=strlen(filename);	
-	r=send(sfd,&len,sizeof(len),0);//·¢ËÍÎÄ¼şÃû³¤¶È
-	r=send(sfd,filename,len,0);//·¢ËÍÎÄ¼şÃû 
+	r=send(sfd,&len,sizeof(len),0);//å‘é€æ–‡ä»¶åé•¿åº¦
+	r=send(sfd,filename,len,0);//å‘é€æ–‡ä»¶å 
 	if(r==-1)
 	printf("4:%m\n"),close(ffd),close(sfd),exit(-1);
-	printf("·¢ËÍÎÄ¼şÃû³É¹¦!\n");
-	//5.Ñ­»··¢ËÍÊı¾İ
+	printf("å‘é€æ–‡ä»¶åæˆåŠŸ!\n");
+	//5.å¾ªç¯å‘é€æ•°æ®
 	while(1)
 	{
 		size=read(ffd,buf,128);
@@ -50,14 +50,14 @@ main()
 		if(size==0) break;
 		if(size>0)
 		{
-			//·¢ËÍÊı¾İ³¤¶È
+			//å‘é€æ•°æ®é•¿åº¦
 			r=send(sfd,&size,sizeof(size),0);
 			if(r==-1) break;
-			r=send(sfd,buf,size,0);//·¢ËÍÊı¾İ
+			r=send(sfd,buf,size,0);//å‘é€æ•°æ®
 			if(r==-1) break;
 		}
 	}
-	//6.¶ÁÈ¡µ½ÎÄ¼şÎ²£¬·¢ËÍ0Êı¾İ°ü
+	//6.è¯»å–åˆ°æ–‡ä»¶å°¾ï¼Œå‘é€0æ•°æ®åŒ…
 	size=0;
 	r=send(sfd,&size,sizeof(size),0);
 	close(ffd);

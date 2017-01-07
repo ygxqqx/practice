@@ -17,7 +17,7 @@ main() {
 	int r;
 	int i;
 	r=scandir("/home", &d, myfilter, mysort);
-	printf("×ÓÄ¿Â¼¸öÊı:%d\n", r);
+	printf("å­ç›®å½•ä¸ªæ•°:%d\n", r);
 	for (i=0;i<r;i++) {
 		printf("%s\n", d[i]->d_name);
 	}

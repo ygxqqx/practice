@@ -6,9 +6,9 @@
 void deal(int s) {
 	int status;
 	wait(&status);
-	printf("»ØÊÕÖĞ.....\n");
+	printf("å›æ”¶ä¸­.....\n");
 	sleep(5);	
-	printf("»ØÊÕÍê±Ï:%d!\n",WEXITSTATUS(status));
+	printf("å›æ”¶å®Œæ¯•:%d!\n",WEXITSTATUS(status));
 			
 }
 main() {
@@ -17,7 +17,7 @@ main() {
 		//parent
 		printf("child!\n");
 		sleep(20);
-		printf("ÍË³ö!\n");
+		printf("é€€å‡º!\n");
 		exit(88);
 	} else {		
 		//child

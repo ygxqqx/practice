@@ -18,7 +18,7 @@ main()
 	//1.socket
 	serverfd=socket(AF_INET,SOCK_STREAM,0);
 	if(serverfd==-1) printf("1:%m\n"),exit(-1);
-	printf("½¨Á¢·şÎñÆ÷socket³É¹¦!\n");
+	printf("å»ºç«‹æœåŠ¡å™¨socketæˆåŠŸ!\n");
 	//2.bind
 	sadr.sin_family=AF_INET;
 	sadr.sin_port=htons(9999);
@@ -26,22 +26,22 @@ main()
 	r=bind(serverfd,
 			(struct sockaddr*)&sadr,sizeof(sadr));
 	if(r==-1) printf("2:%m\n"),exit(-1);
-	printf("·şÎñÆ÷µØÖ·°ó¶¨³É¹¦!\n");
+	printf("æœåŠ¡å™¨åœ°å€ç»‘å®šæˆåŠŸ!\n");
 	
 	//3.listen
 	r=listen(serverfd,10);
 	if(r==-1) printf("3:%m\n"),exit(-1);
-	printf("¼àÌı·şÎñÆ÷³É¹¦!\n");
+	printf("ç›‘å¬æœåŠ¡å™¨æˆåŠŸ!\n");
 	
 	//4.accept
 	len=sizeof(cadr);
 	cfd=accept(serverfd,
 			(struct sockaddr*)&cadr,&len);
-	printf("ÓĞÈËÁ¬½Ó:%d,IP:%s:%u\n",
+	printf("æœ‰äººè¿æ¥:%d,IP:%s:%u\n",
 			cfd,inet_ntoa(cadr.sin_addr),
 			ntohs(cadr.sin_port));		
 	
-	//5.´¦Àí´úÀí¿Í»§ÃèÊö·ûºÅµÄÊı¾İ
+	//5.å¤„ç†ä»£ç†å®¢æˆ·æè¿°ç¬¦å·çš„æ•°æ®
 	while(1)
 	{
 		r=recv(cfd,&a,4,MSG_WAITALL);		
@@ -53,12 +53,12 @@ main()
 		
 		if(r==0)
 		{
-			printf("Á¬½Ó¶Ï¿ª!\n");
+			printf("è¿æ¥æ–­å¼€!\n");
 			break;
 		}
 		if(r==-1)
 		{
-			printf("ÍøÂç¹ÊÕÏ!\n");
+			printf("ç½‘ç»œæ•…éšœ!\n");
 			break;
 		}
 	}

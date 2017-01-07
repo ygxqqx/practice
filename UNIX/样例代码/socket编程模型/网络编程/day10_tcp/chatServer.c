@@ -7,37 +7,37 @@
 #include <arpa/inet.h>
 #include <sys/mman.h>
 int sfd;
-int *fds;//´æ·ÅËùÓĞ¿Í»§´úÀíÃèÊö·ûºÅ
-int idx=0;//¿Í»§ÔÚÊı×éÖĞÏÂ±ê
+int *fds;//å­˜æ”¾æ‰€æœ‰å®¢æˆ·ä»£ç†æè¿°ç¬¦å·
+int idx=0;//å®¢æˆ·åœ¨æ•°ç»„ä¸­ä¸‹æ ‡
 struct sockaddr_in dr;
 int r;
 main()
 {
-	//1.½¨Á¢·şÎñÆ÷ socket
+	//1.å»ºç«‹æœåŠ¡å™¨ socket
 	fds=mmap(0,4*100,PROT_READ|PROT_WRITE,
 		MAP_ANONYMOUS|MAP_SHARED,0,0);
 	bzero(fds,sizeof(fds));
 	sfd=socket(AF_INET,SOCK_STREAM,0);
 	if(sfd==-1) printf("1:%m\n"),exit(-1);	
 	printf("socket OK!\n");
-	//2.°ó¶¨µØÖ·
+	//2.ç»‘å®šåœ°å€
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(9989);
 	dr.sin_addr.s_addr=inet_addr("192.168.180.92");
 	r=bind(sfd,(struct sockaddr*)&dr,sizeof(dr));
 	if(r==-1) printf("2:%m\n"),exit(-1);
 	printf("bind ok!\n");
-	//3.¼àÌı
+	//3.ç›‘å¬
 	r=listen(sfd,10);
 	if(r==-1) printf("3:%m\n"),exit(-1);
 	printf("listen ok!\n");
-	//4.Ñ­»·½ÓÊÕ¿Í»§Á¬½Ó
+	//4.å¾ªç¯æ¥æ”¶å®¢æˆ·è¿æ¥
 	while(1)
 	{
 		fds[idx]=accept(sfd,0,0);
 		if(fds[idx]==-1) break;
-		printf("ÓĞ¿Í»§Á¬½Ó:%d\n",fds[idx]);
-		//5.½¨Á¢Ò»¸ö×Ó½ø³Ì
+		printf("æœ‰å®¢æˆ·è¿æ¥:%d\n",fds[idx]);
+		//5.å»ºç«‹ä¸€ä¸ªå­è¿›ç¨‹
 		if(fork())
 		{
 			idx++;
@@ -45,32 +45,32 @@ main()
 		}
 		else
 		{		
-			//6.×Ó½ø³ÌÈÎÎñ£º½ÓÊÕ¿Í»§Êı¾İ²¢ÇÒ¹ã²¥
+			//6.å­è¿›ç¨‹ä»»åŠ¡ï¼šæ¥æ”¶å®¢æˆ·æ•°æ®å¹¶ä¸”å¹¿æ’­
 			char buf[256];
 			int i;
-			printf("¿ªÊ¼½ÓÊÕ¿Í»§Êı¾İ:%d\n",fds[idx]);
+			printf("å¼€å§‹æ¥æ”¶å®¢æˆ·æ•°æ®:%d\n",fds[idx]);
 			while(1)
 			{
-				//½ÓÊÕ¿Í»§Êı¾İ
+				//æ¥æ”¶å®¢æˆ·æ•°æ®
 				r=recv(fds[idx],buf,255,0);
 				printf("%d\n",r);
 				if(r==0)
 				{
-					printf("ÓĞ¿Í»§ÍË³ö\n");
+					printf("æœ‰å®¢æˆ·é€€å‡º\n");
 					close(fds[idx]);
 					fds[idx]=0;
 					break;					
 				}
 				if(r==-1)
 				{
-					printf("ÍøÂç¹ÊÕÏ\n");
+					printf("ç½‘ç»œæ•…éšœ\n");
 					close(fds[idx]);
 					fds[idx]=0;
 					break;
 				}
 				buf[r]=0;
-				printf("À´×Ô¿Í»§µÄÊı¾İ:%s\n",buf);
-				//¹ã²¥
+				printf("æ¥è‡ªå®¢æˆ·çš„æ•°æ®:%s\n",buf);
+				//å¹¿æ’­
 				for(i=0;i<100;i++)
 				{
 					if(fds[i]>0)

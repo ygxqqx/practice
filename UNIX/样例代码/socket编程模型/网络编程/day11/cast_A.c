@@ -11,7 +11,7 @@ main()
 	int r;
 	struct sockaddr_in dr;
 	
-	//1.选项设置
+	//1.閫夐」璁剧疆
 	fd=socket(PF_INET,SOCK_DGRAM,0);
 	if(fd==-1) printf("1:%m\n"),exit(-1);
 	
@@ -20,7 +20,7 @@ main()
 	if(r==-1) printf("2:%m\n"),exit(-1);
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(9999);
-	//2.使用广播IP地址
+	//2.浣跨敤骞挎挱IP鍦板潃
 	dr.sin_addr.s_addr=inet_addr("192.168.180.255");
 	
 	r=sendto(fd,"Hello",5,0,

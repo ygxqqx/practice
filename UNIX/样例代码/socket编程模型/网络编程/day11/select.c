@@ -13,7 +13,7 @@ main()
 		FD_ZERO(&fds);
 		FD_SET(0,&fds);
 		r=select(1,&fds,0,0,0);
-		printf("ÓĞÊı¾İÊäÈë!\n");
+		printf("æœ‰æ•°æ®è¾“å…¥!\n");
 		r=read(0,buf,99);
 	}
 }

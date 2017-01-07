@@ -3,20 +3,20 @@
 main()
 {
 	struct hostent *ent;
-	/*´ò¿ªÖ÷»úÅäÖÃÊı¾İ¿âÎÄ¼ş*/
+	/*æ‰“å¼€ä¸»æœºé…ç½®æ•°æ®åº“æ–‡ä»¶*/
 	sethostent(1);
 	while(1)
 	{
 		ent=gethostent();
 		if(ent==0) break;
 		
-		printf("Ö÷»úÃû:%s\t",ent->h_name);
-		printf("IPµØÖ·:%hhu.%hhu.%hhu.%hhu\t",
+		printf("ä¸»æœºå:%s\t",ent->h_name);
+		printf("IPåœ°å€:%hhu.%hhu.%hhu.%hhu\t",
 				ent->h_addr[0],
 				ent->h_addr[1],
 				ent->h_addr[2],
 				ent->h_addr[3]);
-		printf("±ğÃû:%s\n",ent->h_aliases[0]);
+		printf("åˆ«å:%s\n",ent->h_aliases[0]);
 	}
 	endhostent();
 }

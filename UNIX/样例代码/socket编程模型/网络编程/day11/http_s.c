@@ -42,7 +42,7 @@ main()
         "Content-Length: 28\r\n"
         "Connection: keep-alive\r\n"
         "\r\n"
-        "<font color=red>靓崽!</font>");
+        "<font color=red>闈撳唇!</font>");
     while(1)
     {
         r=recv(cfd,buf,1024,0);
@@ -51,7 +51,7 @@ main()
             buf[r]=0;
             printf("recerve data:\n");
             printf("%s\n",buf);
-            // recerve data:以下是浏览器访问，给服务器所发的东西
+            // recerve data:浠ヤ笅鏄祻瑙堝櫒璁块棶锛岀粰鏈嶅姟鍣ㄦ墍鍙戠殑涓滆タ
             // GET /index.html HTTP/1.1
             // Host: 192.168.11.139:10000
             // User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:35.0) Gecko/20100101 Firefox/35.0

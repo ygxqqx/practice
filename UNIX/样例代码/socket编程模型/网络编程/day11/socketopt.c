@@ -11,18 +11,18 @@ main()
 	
 	fd=socket(AF_INET,SOCK_DGRAM,0);
 	getsockopt(fd,SOL_SOCKET,SO_RCVBUF,&type,&len);
-	printf("ª∫≥Â¥Û–°:%u\n",type);
+	printf("ÁºìÂÜ≤Â§ßÂ∞è:%u\n",type);
 	/*
 	getsockopt(fd,SOL_SOCKET,SO_TYPE,&type,&len);
 	
 	printf("%u:%u\n",SOCK_STREAM,type);
 	if(type & SOCK_STREAM)
 	{
-		printf("¡˜!\n");
+		printf("ÊµÅ!\n");
 	}
 	if(type & SOCK_DGRAM)
 	{
-		printf("±®Œƒ!\n");
+		printf("Êä•Êñá!\n");
 	}
 	*/
 }

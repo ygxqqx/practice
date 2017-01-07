@@ -33,7 +33,7 @@ void main() {
 		bzero(buf, sizeof(buf));
 		r = recv(fd, buf, sizeof(buf), 0);
 		buf[r] = 0;
-		printf("来自接收方的数据:%s\n", buf);
+		printf("鏉ヨ嚜鎺ユ敹鏂圭殑鏁版嵁:%s\n", buf);
 		//r=send(fd,buf,r,0);		
 		if (r == -1) {
 			break;

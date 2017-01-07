@@ -14,14 +14,14 @@ main()
 	
 	fd=socket(PF_INET,SOCK_DGRAM,0);
 	if(fd==-1) printf("1:%m\n"),exit(-1);
-	//1.Ñ¡Ïî
+	//1.é€‰é¡¹
 	r=setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,
 				&opt,sizeof(opt));
 	if(r==-1) printf("2:%m\n"),exit(-1);
 	
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(9999);
-	//2.¹ã²¥µØÖ·
+	//2.å¹¿æ’­åœ°å€
 	dr.sin_addr.s_addr=inet_addr("192.168.180.255");
 	
 	r=bind(fd,(struct sockaddr*)&dr,sizeof(dr));
@@ -31,7 +31,7 @@ main()
 	if(r>0)
 	{
 		buf[r]=0;
-		printf("¹ã²¥Êı¾İ£º%s\n",buf);
+		printf("å¹¿æ’­æ•°æ®ï¼š%s\n",buf);
 	}
 	close(fd);
 	

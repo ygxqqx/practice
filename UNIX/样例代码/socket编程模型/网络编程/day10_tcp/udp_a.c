@@ -15,7 +15,7 @@ main()
 	//1.socket
 	fd=socket(AF_INET,SOCK_DGRAM,0);
 	if(fd==-1) printf("1:%m\n"),exit(-1);
-	printf("建立socket成功!\n");
+	printf("寤虹珛socket鎴愬姛!\n");
 	//2.bind
 	addr.sin_family=AF_INET;
 	addr.sin_port=htons(11111);
@@ -23,7 +23,7 @@ main()
 	r=bind(fd,
 			(struct sockaddr*)&addr,sizeof(addr));
 	if(r==-1) printf("2:%m\n"),exit(-1);
-	printf("绑定成功!\n");
+	printf("缁戝畾鎴愬姛!\n");
 	
 	
 	while(1)

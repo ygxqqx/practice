@@ -14,34 +14,34 @@ main()
 	char buf[128];
 	char filename[100];
 	struct sockaddr_in dr;
-	//1.½¨Á¢·şÎñÆ÷socket
+	//1.å»ºç«‹æœåŠ¡å™¨socket
 	sfd=socket(AF_INET,SOCK_STREAM,0);
 	if(sfd==-1) printf("1:%m\n"),exit(-1);
-	printf("½¨Á¢·şÎñÆ÷³É¹¦!\n");
-	//2.°ó¶¨IPµØÖ·Óë¶Ë¿Ú
+	printf("å»ºç«‹æœåŠ¡å™¨æˆåŠŸ!\n");
+	//2.ç»‘å®šIPåœ°å€ä¸ç«¯å£
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(9988);
 	dr.sin_addr.s_addr=inet_addr("192.168.180.92");
 	r=bind(sfd,(struct sockaddr*)&dr,sizeof(dr));
 	if(r==-1) printf("2:%m\n"),close(sfd),exit(-1);
-	printf("°ó¶¨µØÖ·³É¹¦£¡\n");
-	//3.¼àÌı
+	printf("ç»‘å®šåœ°å€æˆåŠŸï¼\n");
+	//3.ç›‘å¬
 	r=listen(sfd,10);
 	if(r==-1) printf("3:%m\n"),close(sfd),exit(-1);
-	printf("¼àÌı³É¹¦!\n");
-	//4.½ÓÊÕÁ¬½Ó
+	printf("ç›‘å¬æˆåŠŸ!\n");
+	//4.æ¥æ”¶è¿æ¥
 	cfd=accept(sfd,0,0);
 	if(cfd==-1) printf("4:%m\n"),close(sfd),exit(-1);
-	printf("¿ªÊ¼½ÓÊÕÎÄ¼ş!\n");
-	//5.½ÓÊÕÎÄ¼şÃû
+	printf("å¼€å§‹æ¥æ”¶æ–‡ä»¶!\n");
+	//5.æ¥æ”¶æ–‡ä»¶å
 	r=recv(cfd,&len,sizeof(len),MSG_WAITALL);
-	printf("ÎÄ¼şÃû³¤¶È:%d\n",len);
+	printf("æ–‡ä»¶åé•¿åº¦:%d\n",len);
 	r=recv(cfd,filename,len,MSG_WAITALL);
 	filename[len]=0;
-	printf("´«µİµÄÎÄ¼şÃûÊÇ:%s\n",filename);
-	//6.´´½¨ÎÄ¼ş
+	printf("ä¼ é€’çš„æ–‡ä»¶åæ˜¯:%s\n",filename);
+	//6.åˆ›å»ºæ–‡ä»¶
 	ffd=open(filename,O_RDWR|O_CREAT,0666);	
-	//7.Ñ­»·½ÓÊÕÎÄ¼şÊı¾İ
+	//7.å¾ªç¯æ¥æ”¶æ–‡ä»¶æ•°æ®
 	while(1)
 	{
 		r=recv(cfd,&len,sizeof(len),MSG_WAITALL);
@@ -54,5 +54,5 @@ main()
 	close(ffd);
 	close(cfd);
 	close(sfd);
-	printf("½ÓÊÕÎÄ¼şÍê±Ï!\n");
+	printf("æ¥æ”¶æ–‡ä»¶å®Œæ¯•!\n");
 }

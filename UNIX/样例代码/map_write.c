@@ -12,12 +12,12 @@ struct stu {
 };
 main() {
 	int fd;
-	struct stu *s;//ÎÄ¼şÔÚĞéÄâÄÚ´æµÄÓ³ÉäÊ×µØÖ·
+	struct stu *s;//æ–‡ä»¶åœ¨è™šæ‹Ÿå†…å­˜çš„æ˜ å°„é¦–åœ°å€
 	struct stat st;
-	int size;//ÎÄ¼ş´óĞ¡
-	int count;//¼ÇÂ¼ÌõÊı
+	int size;//æ–‡ä»¶å¤§å°
+	int count;//è®°å½•æ¡æ•°
 	int i;
-	//1.´ò¿ªÎÄ¼ş
+	//1.æ‰“å¼€æ–‡ä»¶
 	fd = open("newstu.dat",O_RDWR|O_CREAT|O_EXCL,0666);
 	if (fd == -1) {
 		fd = open("newstu.dat",O_RDWR);
@@ -26,23 +26,23 @@ main() {
 			exit(-1);
 		} 
 	}
-	//2.µÃµ½ÎÄ¼ş´óĞ¡£¬ÎÄ¼ş¼ÇÂ¼ÌõÊı
+	//2.å¾—åˆ°æ–‡ä»¶å¤§å°ï¼Œæ–‡ä»¶è®°å½•æ¡æ•°
 	fstat(fd,&st);
 	size=st.st_size;
 	count=size/sizeof(struct stu);
-	//3.ÎÄ¼ş´óĞ¡¸Ä±äÖ»ÒªÔÚmunmapÖ®Ç°µ÷ÓÃ¶¼ÓĞĞ§	
+	//3.æ–‡ä»¶å¤§å°æ”¹å˜åªè¦åœ¨munmapä¹‹å‰è°ƒç”¨éƒ½æœ‰æ•ˆ	
 	//ftruncate(fd,size+sizeof(struct stu));
-	//4.Ó³Éäµ½Ò»¸öĞéÄâµÄµØÖ·
+	//4.æ˜ å°„åˆ°ä¸€ä¸ªè™šæ‹Ÿçš„åœ°å€
 	s=mmap(0,size+sizeof(struct stu),
 				PROT_READ|PROT_WRITE,
 				MAP_SHARED,fd,0);
-	//5.°ÑÊı¾İĞ´ÈëĞéÄâµØÖ·
+	//5.æŠŠæ•°æ®å†™å…¥è™šæ‹Ÿåœ°å€
 	/*
-	printf("ÊäÈëĞÕÃû:");
+	printf("è¾“å…¥å§“å:");
 	scanf("%s",s[count].name);
-	printf("ÊäÈëÄêÁä:");
+	printf("è¾“å…¥å¹´é¾„:");
 	scanf("%d",&(s[count].age));
-	printf("ÊäÈë³É¼¨:");
+	printf("è¾“å…¥æˆç»©:");
 	scanf("%f",&(s[count].score));
 	ftruncate(fd,size+sizeof(struct stu));
 	*/
@@ -50,8 +50,8 @@ main() {
 		printf("%s,\t,%d,\t%.2f\n",
 			s[i].name,s[i].age,s[i].score);
 	}	
-	//6.Ğ¶ÔØĞéÄâµØÖ·
+	//6.å¸è½½è™šæ‹Ÿåœ°å€
 	munmap(s,sizeof(struct stu)+size);
-	//7.¹Ø±ÕÎÄ¼ş
+	//7.å…³é—­æ–‡ä»¶
 	close(fd);
 }

@@ -17,7 +17,7 @@ main()
 		r=poll(fds,1,-1);
 		if(fds[0].revents & POLLIN)
 		{
-			printf("ÓĞÊı¾İÊäÈë!\n");
+			printf("æœ‰æ•°æ®è¾“å…¥!\n");
 			r=read(0,buf,99);
 		}
 	}

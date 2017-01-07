@@ -13,16 +13,16 @@ main()
 	char strreq[1024];
 	char buf[10*1024];
 	int r; 
-	//½¨Á¢socket
+	//å»ºç«‹socket
 	fd=socket(AF_INET,SOCK_STREAM,0);
 	
-	//Á¬½Ó·şÎñÆ÷192.168.0.72
+	//è¿æ¥æœåŠ¡å™¨192.168.0.72
 	dr.sin_family=AF_INET;
 	dr.sin_port=htons(80);
 	dr.sin_addr.s_addr=inet_addr("192.168.0.72");
 	r=connect(fd,(struct sockaddr*)&dr,sizeof(dr));
 	
-	//¹¹½¨httpÇëÇó×Ö·û´®
+	//æ„å»ºhttpè¯·æ±‚å­—ç¬¦ä¸²
 	sprintf(strreq,
 		"GET /index.php HTTP/1.1\r\n"
 		"Host: 192.168.0.72:80\r\n"
@@ -33,9 +33,9 @@ main()
 		"Keep-Alive: 300\r\n"
 		"Connection: keep-alive\r\n"
 		"\r\n");
-	//·¢ËÍhttpÇëÇó×Ö·û´®
+	//å‘é€httpè¯·æ±‚å­—ç¬¦ä¸²
 	r=send(fd,strreq,strlen(strreq),0);
-	//µÈ´ı·şÎñÆ÷ÏìÓ¦
+	//ç­‰å¾…æœåŠ¡å™¨å“åº”
 	//while(1)
 	//{
 		r=recv(fd,buf,1024,0);
