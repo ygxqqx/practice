@@ -13,9 +13,9 @@ void deal(int s)
 {
 	if(s==SIGINT)
 	{
-		//4.卸载共享内存shmdt
+		//4.鍗歌浇鍏变韩鍐呭瓨shmdt
 		shmdt(p);
-		//5.删除共享内存shctl
+		//5.鍒犻櫎鍏变韩鍐呭瓨shctl
 		shmctl(shmid,IPC_RMID,0);
 		exit(0);
 	}
@@ -24,16 +24,16 @@ main()
 {
 	
 	signal(SIGINT,deal);
-	//1.创建共享内存shmget
+	//1.鍒涘缓鍏变韩鍐呭瓨shmget
 	key=ftok(".",255);
 	if(key==-1) printf("ftok error:%m\n"),exit(-1);
 	
 	shmid=shmget(key,4,IPC_CREAT|IPC_EXCL|0666);
 	if(shmid==-1) printf("get error:%m\n"),exit(-1);
-	//2.挂载共享内存shmat
+	//2.鎸傝浇鍏变韩鍐呭瓨shmat
 	p=shmat(shmid,0,0);
 	if(p==(int*)-1) printf("at error:%m\n"),exit(-1);
-	//3.访问共享内存
+	//3.璁块棶鍏变韩鍐呭瓨
 	while(1)
 	{
 		*p=i;

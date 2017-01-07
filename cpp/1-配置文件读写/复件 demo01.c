@@ -2,11 +2,11 @@
 #include "stdlib.h"
 #include "string.h"
 /*
-1 ±àĞ´Ò»¸öÒµÎñº¯Êı£¬ÊµÏÖ×Ö·û´®£¨Ç°ºó¸÷ÓĞÈı¸ö¿Õ¸ñ£¬µ¥´ÊÇ°ºóÒ²¾ùÓĞ¿Õ¸ñ£©
-	"   i am student, you are teacher   " £¬
-	¸÷¸öµ¥´ÊÊ××Ö·û´óĞ´£¬½á¹ûÈçÏÂ"   i am student,  you are teacher   " £¬
-	ÒªÇó1£ºÊµÏÖËùÓĞ½Ó¿Ú  70
-	ÒªÇó2£ºĞ´³ö²âÊÔ³ÌĞò  30
+1 ç¼–å†™ä¸€ä¸ªä¸šåŠ¡å‡½æ•°ï¼Œå®ç°å­—ç¬¦ä¸²ï¼ˆå‰åå„æœ‰ä¸‰ä¸ªç©ºæ ¼ï¼Œå•è¯å‰åä¹Ÿå‡æœ‰ç©ºæ ¼ï¼‰
+	"   i am student, you are teacher   " ï¼Œ
+	å„ä¸ªå•è¯é¦–å­—ç¬¦å¤§å†™ï¼Œç»“æœå¦‚ä¸‹"   i am student,  you are teacher   " ï¼Œ
+	è¦æ±‚1ï¼šå®ç°æ‰€æœ‰æ¥å£  70
+	è¦æ±‚2ï¼šå†™å‡ºæµ‹è¯•ç¨‹åº  30
 	*/
 
 
@@ -30,7 +30,7 @@ int GetString(const char *str1 /*in*/, char *str2 /*in*/)
 	//
 	strcpy(str2, str1);
 
-	//³õÊ¼»¯Ñ­»·»·¾³
+	//åˆå§‹åŒ–å¾ªç¯ç¯å¢ƒ
 	p1 = str2 +1 ;
 	p2 = str2;
 	for (i=0; i<len && (*p1!= NULL) ; i++)
@@ -40,7 +40,7 @@ int GetString(const char *str1 /*in*/, char *str2 /*in*/)
 			*p1 = *p1 - 32;
 		}
 
-		//´òÔìÑ­»·Ìõ¼ş
+		//æ‰“é€ å¾ªç¯æ¡ä»¶
 		p2 = p1;
 		p1 ++;
 	}
@@ -91,7 +91,7 @@ int GetString_Adv(const char *str1/*in*/, char **str2 /*out*/)
 	//
 	strcpy(ptmp, str1);
 
-	//³õÊ¼»¯Ñ­»·»·¾³
+	//åˆå§‹åŒ–å¾ªç¯ç¯å¢ƒ
 	p1 = ptmp +1 ;
 	p2 = ptmp;
 	for (i=0; i<len && (*p1!= NULL) ; i++)
@@ -101,11 +101,11 @@ int GetString_Adv(const char *str1/*in*/, char **str2 /*out*/)
 			*p1 = *p1 - 32;
 		}
 
-		//´òÔìÑ­»·Ìõ¼ş
+		//æ‰“é€ å¾ªç¯æ¡ä»¶
 		p2 = p1;
 		p1 ++;
 	}
-	*str2 = ptmp; //str2ÊÇÊµ²ÎµÄµØÖ· ¼ä½Ó¸³ÖµĞŞ¸ÄÊµ²Î£¬ÈÃÊµ²ÎÖ¸ÏòĞÂ·ÖÅäµÄÄÚ´æ¿Õ¼ä
+	*str2 = ptmp; //str2æ˜¯å®å‚çš„åœ°å€ é—´æ¥èµ‹å€¼ä¿®æ”¹å®å‚ï¼Œè®©å®å‚æŒ‡å‘æ–°åˆ†é…çš„å†…å­˜ç©ºé—´
 	return ret;
 }
 
@@ -116,7 +116,7 @@ int GetString_Adv_Free1(char *str2)
 		return -1;
 	}
 	free(str2);
-	str2 = NULL; //À¬»øÓï¾ä
+	str2 = NULL; //åƒåœ¾è¯­å¥
 }
 
 int GetString_Adv_Free2(char **                  str2)

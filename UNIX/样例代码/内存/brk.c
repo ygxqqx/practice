@@ -4,7 +4,7 @@
 main()
 {
 	/*
-	int *p1=sbrk(4);//返回空闲地址，并修改指针为＋size
+	int *p1=sbrk(4);//杩斿洖绌洪棽鍦板潃锛屽苟淇敼鎸囬拡涓猴紜size
 	int *p2=sbrk(200);
 	int *p3=sbrk(-4);
 	int *p4=sbrk(-4);

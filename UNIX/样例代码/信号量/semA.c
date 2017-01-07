@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
-//2.1.¶¨ÒåÒ»¸öÁªºÏÌå
+//2.1.å®šä¹‰ä¸€ä¸ªè”åˆä½“
 union semun {
 	int	val;
 	struct semid_ds *buf;
@@ -14,37 +14,37 @@ union semun {
 main()
 {
 	key_t key;
-	int semid;	//ĞÅºÅÁ¿ID
-	union  semun v;//2.2.¶¨Òå³õÊ¼»¯Öµ
+	int semid;	//ä¿¡å·é‡ID
+	union  semun v;//2.2.å®šä¹‰åˆå§‹åŒ–å€¼
 	int r;
 	struct sembuf op[1];
-	//1.´´½¨ĞÅºÅÁ¿
+	//1.åˆ›å»ºä¿¡å·é‡
 	key=ftok(".",99);
 	if(key==-1) printf("ftok err:%m\n"),exit(-1);
 	
-	//semid=semget(key,1/*ĞÅºÅÁ¿Êı×é¸öÊı*/,
+	//semid=semget(key,1/*ä¿¡å·é‡æ•°ç»„ä¸ªæ•°*/,
 	//		IPC_CREAT|IPC_EXCL|0666);
 			
-	semid=semget(key,1,0);//µÃµ½ĞÅºÅÁ¿
+	semid=semget(key,1,0);//å¾—åˆ°ä¿¡å·é‡
 	if(semid==-1) printf("get err:%m\n"),exit(-1);
 	
 	printf("id:%d\n",semid);
-	//2.³õÊ¼»¯ĞÅºÅÁ¿
+	//2.åˆå§‹åŒ–ä¿¡å·é‡
 	v.val=2;
-	r=semctl(semid,0,SETVAL,v);//2.3ÉèÖÃĞÅºÅÁ¿µÄÖµ
-	if(r==-1) printf("³õÊ¼»¯Ê§°Ü!\n"),exit(-1);
+	r=semctl(semid,0,SETVAL,v);//2.3è®¾ç½®ä¿¡å·é‡çš„å€¼
+	if(r==-1) printf("åˆå§‹åŒ–å¤±è´¥!\n"),exit(-1);
 
-	//3.¶ÔĞÅºÅÁ¿½øĞĞ×èÈû²Ù×÷
-	//3.1.¶¨Òå²Ù×÷
-	op[0].sem_num=0;//ĞÅºÅÁ¿ÏÂ±ê
-	op[0].sem_op=-1;//ĞÅºÅÁ¿²Ù×÷µ¥Î»ÓëÀàĞÍ
+	//3.å¯¹ä¿¡å·é‡è¿›è¡Œé˜»å¡æ“ä½œ
+	//3.1.å®šä¹‰æ“ä½œ
+	op[0].sem_num=0;//ä¿¡å·é‡ä¸‹æ ‡
+	op[0].sem_op=-1;//ä¿¡å·é‡æ“ä½œå•ä½ä¸ç±»å‹
 	op[0].sem_flg=0;
 	while(1)
 	{
 		r=semop(semid,op,1);
-		printf("½â³ı×èÈû£¡\n");
+		printf("è§£é™¤é˜»å¡ï¼\n");
 	}
 	
-	//4.É¾³ı(¿ÉÒÔ²»É¾³ı)
+	//4.åˆ é™¤(å¯ä»¥ä¸åˆ é™¤)
 	
 }

@@ -4,11 +4,11 @@
 
 
 /*
-2 ±àĞ´Ò»¸öÒµÎñº¯Êı£¬ÊµÏÖ°´ĞĞ¶ÁÈ¡ÎÄ¼ş¡£°ÑÄÚÈİ°´ÕÕµÚÈıÖÖÄÚ´æÄ£ĞÍ´ò°üÊı¾İ´«³ö£¬°ÑĞĞÊıÍ¨¹ıº¯Êı²ÎÊı´«³ö¡£
-º¯ÊıÔ­ĞÍÓĞÁ½¸ö£¬ÈÎÒâÑ¡ÔñÆäÒ»
-ÒªÇó1£ºÇë×Ô¼ºÈÎÒâÑ¡ÔñÒ»¸ö½Ó¿Ú£¨º¯Êı£©£¬²¢ÊµÏÖ¹¦ÄÜ£»70·Ö
-ÒªÇó2£º±àĞ´²âÊÔÓÃÀı¡£30·Ö
-ÒªÇó3£º×Ô¼º±àĞ´ÄÚ´æÊÍ·Åº¯Êı
+2 ç¼–å†™ä¸€ä¸ªä¸šåŠ¡å‡½æ•°ï¼Œå®ç°æŒ‰è¡Œè¯»å–æ–‡ä»¶ã€‚æŠŠå†…å®¹æŒ‰ç…§ç¬¬ä¸‰ç§å†…å­˜æ¨¡å‹æ‰“åŒ…æ•°æ®ä¼ å‡ºï¼ŒæŠŠè¡Œæ•°é€šè¿‡å‡½æ•°å‚æ•°ä¼ å‡ºã€‚
+å‡½æ•°åŸå‹æœ‰ä¸¤ä¸ªï¼Œä»»æ„é€‰æ‹©å…¶ä¸€
+è¦æ±‚1ï¼šè¯·è‡ªå·±ä»»æ„é€‰æ‹©ä¸€ä¸ªæ¥å£ï¼ˆå‡½æ•°ï¼‰ï¼Œå¹¶å®ç°åŠŸèƒ½ï¼›70åˆ†
+è¦æ±‚2ï¼šç¼–å†™æµ‹è¯•ç”¨ä¾‹ã€‚30åˆ†
+è¦æ±‚3ï¼šè‡ªå·±ç¼–å†™å†…å­˜é‡Šæ”¾å‡½æ•°
 */
 
 int readFile2(const char *pfilename/*in*/, char ***p/*out*/, int *lineNum/*int out*/);
@@ -39,10 +39,10 @@ char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
 		goto End;
 	}
 	
-	//µÚÒ»±é ¶ÁÈ¡ÎÄ¼şÓĞ¶àÉÙĞĞ
+	//ç¬¬ä¸€é è¯»å–æ–‡ä»¶æœ‰å¤šå°‘è¡Œ
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -63,14 +63,14 @@ char **readFile1(const char *pfilename/*in*/, int *lineNum/*in out*/)
 		goto End;
 	}
 
-	//ÈÃÎÄ¼şÖ¸ÕëÖ¸ÏòÎÄ¼şµÄ¿ªÍ·£¬Ä¿µÄ£ºµÚ¶ş´Î´ÓÍ·¼ìË÷
+	//è®©æ–‡ä»¶æŒ‡é’ˆæŒ‡å‘æ–‡ä»¶çš„å¼€å¤´ï¼Œç›®çš„ï¼šç¬¬äºŒæ¬¡ä»å¤´æ£€ç´¢
 	fseek(fp, 0L, SEEK_SET);
 	
 	//
 	i = 0;
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -97,7 +97,7 @@ End:
 	{
 		fclose(fp); 
 	}
-	//¸³Öµ
+	//èµ‹å€¼
 	*lineNum = tmpLine;
 	return pTmp;
 }
@@ -168,10 +168,10 @@ int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in 
 		goto End;
 	}
 
-	//µÚÒ»±é ¶ÁÈ¡ÎÄ¼şÓĞ¶àÉÙĞĞ
+	//ç¬¬ä¸€é è¯»å–æ–‡ä»¶æœ‰å¤šå°‘è¡Œ
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -192,14 +192,14 @@ int readFile1_Adv(const char *pfilename/*in*/,char ***myfileP, int *lineNum/*in 
 		goto End;
 	}
 
-	//ÈÃÎÄ¼şÖ¸ÕëÖ¸ÏòÎÄ¼şµÄ¿ªÍ·£¬Ä¿µÄ£ºµÚ¶ş´Î´ÓÍ·¼ìË÷
+	//è®©æ–‡ä»¶æŒ‡é’ˆæŒ‡å‘æ–‡ä»¶çš„å¼€å¤´ï¼Œç›®çš„ï¼šç¬¬äºŒæ¬¡ä»å¤´æ£€ç´¢
 	fseek(fp, 0L, SEEK_SET);
 
 	//
 	i = 0;
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -226,7 +226,7 @@ End:
 	{
 		fclose(fp); 
 	}
-	//¸³Öµ
+	//èµ‹å€¼
 	*lineNum = tmpLine;
 	*myfileP = pTmp;
 	return rv;
@@ -280,10 +280,10 @@ int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
 		goto End;
 	}
 
-	//µÚÒ»±é ¶ÁÈ¡ÎÄ¼şÓĞ¶àÉÙĞĞ
+	//ç¬¬ä¸€é è¯»å–æ–‡ä»¶æœ‰å¤šå°‘è¡Œ
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -305,14 +305,14 @@ int readFile1_Adv3(const char *pfilename/*in*/,char ***myfileP/*in out*/)
 	}
 	memset(pTmp, 0, (tmpLine+1) * sizeof(char *));
 
-	//ÈÃÎÄ¼şÖ¸ÕëÖ¸ÏòÎÄ¼şµÄ¿ªÍ·£¬Ä¿µÄ£ºµÚ¶ş´Î´ÓÍ·¼ìË÷
+	//è®©æ–‡ä»¶æŒ‡é’ˆæŒ‡å‘æ–‡ä»¶çš„å¼€å¤´ï¼Œç›®çš„ï¼šç¬¬äºŒæ¬¡ä»å¤´æ£€ç´¢
 	fseek(fp, 0L, SEEK_SET);
 
 	//
 	i = 0;
 	while (!feof(fp))
 	{
-		//¶ÁÃ¿Ò»ĞĞ
+		//è¯»æ¯ä¸€è¡Œ
 		memset(lineBuf, 0, sizeof(lineBuf));
 		p = fgets(lineBuf, 1024*4, fp);
 		if (p == NULL) 
@@ -339,7 +339,7 @@ End:
 	{
 		fclose(fp); 
 	}
-	//¸³Öµ
+	//èµ‹å€¼
 	//*lineNum = tmpLine;
 	*myfileP = pTmp;
 	return rv;
