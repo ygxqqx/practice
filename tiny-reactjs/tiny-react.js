@@ -22,7 +22,7 @@ function ReactDOMComponent(element) {
 }
 
 // component渲染时生成的dom结构
-ReactDOMComponent.prototype.mountComponent(rootID) {
+ReactDOMComponent.prototype.mountComponent = function(rootID) {
     // 赋值标识
     this._rootNodeID = rootID;
     let props = this._currentElement.props;
@@ -53,7 +53,7 @@ ReactDOMComponent.prototype.mountComponent(rootID) {
         if (children.hasOwnProperty(key)) {
             let child = children[key];
             // 这里再次调用了instantiateReactComponent实例化子节点component类，拼接好返回
-            let childComponentInstance = instantiateReactComponent(child);
+            var childComponentInstance = instantiateReactComponent(child);
             childComponentInstance._mountIndex = key;
 
             childrenInstances.push(childComponentInstance);
@@ -117,7 +117,7 @@ React = {
         } else if (childrenLength > 1) {
             let childArray = Array(childrenLength); // 创建长度为 childrenLength 的空数组
             for (let i = 0; i < childrenLength; ++i) {
-                childArray[i] = arguments[childArray + 2];
+                childArray[i] = arguments[i + 2];
             }
             props.children = childArray;
         }
