@@ -1,12 +1,13 @@
-package main;
+package main
 
-import "fmt";
+import "fmt"
+import "example"
 
 func main() {
-	fmt.Println("hello world!");
+	isRight := false
+	if isRight {
+		fmt.Println("hello world!")
+		fmt.Println(`This is a raw string \n`)
+	}
+	example.Hi()
 }
-
-
-
-
-
